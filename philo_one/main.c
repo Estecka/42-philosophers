@@ -6,15 +6,18 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/08 16:15:36 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/09 17:17:01 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "sustenance_ustensile.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+int				g_eatgoal = -1;
 
 extern size_t	ministrlen(const char *str)
 {
@@ -77,6 +80,9 @@ extern int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (argc == 6 && !parseint(argv[5], &g_eatgoal))
 		return (EXIT_FAILURE);
+	if (!ustensile_init(g_philocount))
+		return (EXIT_FAILURE);
 	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
+	ustensile_deinit();
 }

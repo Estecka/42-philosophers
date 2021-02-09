@@ -1,4 +1,10 @@
-SRCS = main.c
+HDRS = \
+	main.h \
+	sustenance_ustensile.h \
+
+SRCS = \
+	main.c \
+	sustenance_ustensile.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -9,6 +15,8 @@ CC = clang
 
 ${NAME}: ${OBJS}
 	${CC} ${OBJS} -o ${NAME} ${CFLAGS}
+
+${OBJS}: ${HDRS}
 
 all: ${NAME}
 

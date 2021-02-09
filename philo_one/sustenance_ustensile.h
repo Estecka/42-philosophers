@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   sustenance_ustensile.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 15:14:10 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/09 17:09:41 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/09 15:10:20 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/09 15:23:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef SUSTENANCE_USTENSILE_H
+# define SUSTENANCE_USTENSILE_H
 
-# define FALSE 0
-# define TRUE 1
+# include <pthread.h>
 
-int	g_philocount;
-int	g_ttdie;
-int	g_tteat;
-int	g_ttsleep;
-int	g_eatgoal;
+/*
+** It's a set of forks. The eating kind.
+*/
+
+pthread_mutex_t	*g_ustensiles;
+
+short			ustensile_init(int count);
+void			ustensile_deinit();
 
 #endif
