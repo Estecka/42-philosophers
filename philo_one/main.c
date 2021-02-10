@@ -6,12 +6,13 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/10 14:56:41 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/10 17:17:00 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "philosopher.h"
+#include "simulation.h"
 #include "sustenance_ustensile.h"
 
 #include <stdio.h>
@@ -69,6 +70,8 @@ static short	parseint(const char *arg, int *dst)
 
 extern int		main(int argc, char **argv)
 {
+	int	status;
+
 	if (argc < 5 || 6 < argc)
 	{
 		write(STDERR_FILENO, "Invalid number of argument\n", 28);
@@ -77,11 +80,9 @@ extern int		main(int argc, char **argv)
 	if (!parseint(argv[1], &g_philocount)
 		|| !parseint(argv[2], &g_ttdie)
 		|| !parseint(argv[3], &g_tteat)
-		|| !parseint(argv[4], &g_ttsleep))
-		return (EXIT_FAILURE);
-	if (argc == 6 && !parseint(argv[5], &g_eatgoal))
-		return (EXIT_FAILURE);
-	if (!ustensile_init(g_philocount))
+		|| !parseint(argv[4], &g_ttsleep)
+		|| (argc == 6 && !parseint(argv[5], &g_eatgoal))
+		|| !ustensile_init(g_philocount))
 		return (EXIT_FAILURE);
 	if (!philo_init(g_philocount))
 	{
@@ -90,6 +91,8 @@ extern int		main(int argc, char **argv)
 	}
 	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
+	status = simulation_main();
 	philo_deinit();
 	ustensile_deinit();
+	return (status);
 }

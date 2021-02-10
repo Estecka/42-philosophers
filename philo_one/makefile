@@ -1,11 +1,13 @@
 HDRS = \
 	main.h \
 	philosopher.h \
+	simulation.h \
 	sustenance_ustensile.h \
 
 SRCS = \
 	main.c \
 	philosopher.c \
+	simulation.c \
 	sustenance_ustensile.c \
 
 OBJS = ${SRCS:.c=.o}
@@ -13,10 +15,11 @@ OBJS = ${SRCS:.c=.o}
 NAME = philo_one
 
 CFLAGS = -Wall -Wextra -Werror
+LIBFLAGS = -lpthread
 CC = clang
 
 ${NAME}: ${OBJS}
-	${CC} ${OBJS} -o ${NAME} ${CFLAGS}
+	${CC} ${OBJS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
 
 ${OBJS}: ${HDRS}
 
