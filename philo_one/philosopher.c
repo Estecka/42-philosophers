@@ -1,52 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sustenance_ustensile.c                             :+:      :+:    :+:   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/10 14:59:06 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/10 14:07:46 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/10 14:57:04 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include "sustenance_ustensile.h"
+#include "philosopher.h"
 
+#include <pthread.h>
 #include <stdlib.h>
 
-static void		ustensile_abort(int count)
+extern short	philo_init(int count)
 {
 	int	i;
 
-	i = -1;
-	while (++i < count)
-		pthread_mutex_destroy(&g_ustensiles[i]);
-	free(g_ustensiles);
-}
-
-extern void		ustensile_deinit(void)
-{
-	if (g_ustensiles)
-		ustensile_abort(g_philocount);
-}
-
-extern short	ustensile_init(int count)
-{
-	int	i;
-	int	status;
-
-	g_ustensiles = malloc(sizeof(pthread_mutex_t) * count);
-	if (!g_ustensiles)
+	g_hoomans = malloc(sizeof(t_philosopher) * count);
+	if (!g_hoomans)
 		return (FALSE);
 	i = -1;
 	while (++i < count)
 	{
-		status = pthread_mutex_init(&g_ustensiles[i], NULL);
-		if (status)
-		{
-			return (FALSE);
-		}
+		g_hoomans[i].uid = i;
+		g_hoomans[i].thread = (pthread_t){ 0 };
+		g_hoomans[i].status = phi_crave;
+		g_hoomans[i].meals = 0;
+		g_hoomans[i].ttdie = g_ttdie;
+		g_hoomans[i].hands[0] = NULL;
+		g_hoomans[i].hands[1] = NULL;
 	}
 	return (TRUE);
+}
+
+extern void		philo_deinit(void)
+{
+	if (g_hoomans)
+		free(g_hoomans);
 }

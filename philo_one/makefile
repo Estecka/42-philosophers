@@ -1,9 +1,11 @@
 HDRS = \
 	main.h \
+	philosopher.h \
 	sustenance_ustensile.h \
 
 SRCS = \
 	main.c \
+	philosopher.c \
 	sustenance_ustensile.c \
 
 OBJS = ${SRCS:.c=.o}

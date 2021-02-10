@@ -6,11 +6,12 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/09 17:17:01 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/10 14:56:41 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "philosopher.h"
 #include "sustenance_ustensile.h"
 
 #include <stdio.h>
@@ -42,7 +43,7 @@ static int		miniatoi(const char *arg)
 	return (result);
 }
 
-static short	isnumber(const char* arg)
+static short	isnumber(const char *arg)
 {
 	while (*arg)
 	{
@@ -53,7 +54,7 @@ static short	isnumber(const char* arg)
 	return (TRUE);
 }
 
-static short	parseint(const char* arg, int *dst)
+static short	parseint(const char *arg, int *dst)
 {
 	if (!isnumber(arg))
 	{
@@ -82,7 +83,13 @@ extern int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!ustensile_init(g_philocount))
 		return (EXIT_FAILURE);
+	if (!philo_init(g_philocount))
+	{
+		ustensile_deinit();
+		return (EXIT_FAILURE);
+	}
 	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
+	philo_deinit();
 	ustensile_deinit();
 }
