@@ -1,11 +1,13 @@
 HDRS = \
 	main.h \
+	chronos.h \
 	philosopher.h \
 	simulation.h \
 	sustenance_ustensile.h \
 
 SRCS = \
 	main.c \
+	chronos.c \
 	philosopher.c \
 	simulation.c \
 	sustenance_ustensile.c \

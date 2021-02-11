@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   chronos.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 15:14:10 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/11 16:03:20 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/11 14:51:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef CHRONOS_H
+# define CHRONOS_H
 
 # include <unistd.h>
 
-# define FALSE 0
-# define TRUE 1
+/*
+** Set the current date as the origin of times.
+*/
 
-unsigned int	g_philocount;
-signed int		g_eatgoal;
-__useconds_t	g_ttdie;
-__useconds_t	g_tteat;
-__useconds_t	g_ttsleep;
+void			stopwatch_start(void);
+
+/*
+** Gives the time in microseconds since the beginning.
+*/
+
+__useconds_t	stopwatch_date(void);
 
 #endif

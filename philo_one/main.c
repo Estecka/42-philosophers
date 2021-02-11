@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/10 17:17:00 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/11 16:10:01 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static short	isnumber(const char *arg)
 	return (TRUE);
 }
 
-static short	parseint(const char *arg, int *dst)
+static short	parseint(const char *arg, unsigned int *dst)
 {
 	if (!isnumber(arg))
 	{
@@ -65,6 +65,18 @@ static short	parseint(const char *arg, int *dst)
 		return (FALSE);
 	}
 	*dst = miniatoi(arg);
+	return (TRUE);
+}
+
+/*
+** Parses a number in milliseconds, and stores its value in microseconds.
+*/
+
+static short	parseusec(const char *arg, __useconds_t *dst)
+{
+	if (!parseint(arg, dst))
+		return (FALSE);
+	*dst *= 1000;
 	return (TRUE);
 }
 
@@ -78,10 +90,10 @@ extern int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	if (!parseint(argv[1], &g_philocount)
-		|| !parseint(argv[2], &g_ttdie)
-		|| !parseint(argv[3], &g_tteat)
-		|| !parseint(argv[4], &g_ttsleep)
-		|| (argc == 6 && !parseint(argv[5], &g_eatgoal))
+		|| !parseusec(argv[2], &g_ttdie)
+		|| !parseusec(argv[3], &g_tteat)
+		|| !parseusec(argv[4], &g_ttsleep)
+		|| (argc == 6 && !parseint(argv[5], (unsigned int*)&g_eatgoal))
 		|| !ustensile_init(g_philocount))
 		return (EXIT_FAILURE);
 	if (!philo_init(g_philocount))
