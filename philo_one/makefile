@@ -12,6 +12,10 @@ SRCS = \
 	simulation.c \
 	sustenance_ustensile.c \
 
+LIBS = \
+	minilibft/libminift.a \
+
+
 OBJS = ${SRCS:.c=.o}
 
 NAME = philo_one
@@ -21,9 +25,12 @@ LIBFLAGS = -lpthread
 CC = clang
 
 ${NAME}: ${OBJS}
-	${CC} ${OBJS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
+	${CC} ${OBJS} ${LIBS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
 
 ${OBJS}: ${HDRS}
+
+%.a: sub_makefile
+	make $(@F) -C $(@D)
 
 all: ${NAME}
 
@@ -35,4 +42,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: re all clean fclean
+.PHONY: \
+	re all clean fclean \
+	sub_makefile \

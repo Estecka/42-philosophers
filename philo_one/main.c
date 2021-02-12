@@ -6,11 +6,12 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/11 16:10:01 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/12 14:30:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include "minilibft/minilibft.h"
 #include "philosopher.h"
 #include "simulation.h"
 #include "sustenance_ustensile.h"
@@ -20,40 +21,6 @@
 #include <unistd.h>
 
 int				g_eatgoal = -1;
-
-extern size_t	ministrlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (*(str++))
-		len++;
-	return (len);
-}
-
-static int		miniatoi(const char *arg)
-{
-	int result;
-
-	result = 0;
-	while (*arg)
-	{
-		result = (result * 10) + *arg - '0';
-		arg++;
-	}
-	return (result);
-}
-
-static short	isnumber(const char *arg)
-{
-	while (*arg)
-	{
-		if (*arg < '0' || '9' < *arg)
-			return (FALSE);
-		arg++;
-	}
-	return (TRUE);
-}
 
 static short	parseint(const char *arg, unsigned int *dst)
 {

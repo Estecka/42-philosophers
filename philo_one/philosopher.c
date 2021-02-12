@@ -6,12 +6,13 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:07:46 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:09:20 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/12 14:41:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "philosopher.h"
+#include "minilibft/minilibft.h"
 
 #include <pthread.h>
 #include <stdlib.h>

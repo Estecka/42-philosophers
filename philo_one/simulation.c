@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/11 16:25:50 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/12 14:48:04 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "chronos.h"
 #include "philosopher.h"
 #include "sustenance_ustensile.h"
+#include "minilibft/minilibft.h"
 
 #include <pthread.h>
 #include <stdio.h>

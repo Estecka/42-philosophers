@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   minilibft.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 15:14:10 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:30:51 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/12 14:22:19 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/12 14:39:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+/*
+** Pinky promise, it's not the actual libft. -3-
+*/
+
+#ifndef MINILIBFT_H
+# define MINILIBFT_H
 
 # include <unistd.h>
 
-unsigned int	g_philocount;
-signed int		g_eatgoal;
-__useconds_t	g_ttdie;
-__useconds_t	g_tteat;
-__useconds_t	g_ttsleep;
+# define TRUE  1
+# define FALSE 0
+
+size_t	ministrlen(const char *str);
+int		miniatoi(const char *arg);
+short	isnumber(const char *arg);
 
 #endif
