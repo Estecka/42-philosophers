@@ -6,12 +6,16 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/11 16:14:07 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/13 15:12:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chronos.h"
+
+#include <unistd.h>
 #include <sys/time.h>
+
+#define WAITSAFEFTYBUFFER 10000
 
 static struct timeval	g_origin;
 
@@ -36,4 +40,20 @@ extern __useconds_t		stopwatch_date(void)
 	gettimeofday(&date, NULL);
 	return (1000000 * (date.tv_sec - g_origin.tv_sec))
 	+ (date.tv_usec - g_origin.tv_usec);
+}
+
+extern void				wait_until(__useconds_t target_date)
+{
+	__useconds_t current_date;
+	__useconds_t sleep_date;
+
+	if (WAITSAFEFTYBUFFER < target_date)
+	{
+		sleep_date = target_date - WAITSAFEFTYBUFFER;
+		current_date = stopwatch_date();
+		if (current_date < sleep_date)
+			usleep(sleep_date - current_date);
+	}
+	while (stopwatch_date() < target_date)
+		continue ;
 }

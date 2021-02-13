@@ -9,6 +9,7 @@ SRCS = \
 	main.c \
 	chronos.c \
 	philosopher.c \
+	philosopher_main.c \
 	simulation.c \
 	sustenance_ustensile.c \
 

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/10 17:01:35 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/12 15:51:49 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ typedef enum e_phistatus	t_phistatus;
 enum	e_phistatus
 {
 	phi_dead = 0,
-	phi_sleep = 1,
-	phi_think = 2,
-	phi_eat = 3,
+	phi_sleeping = 1,
+	phi_thinking = 2,
+	phi_eating = 3,
 };
 
 /*
@@ -54,6 +54,8 @@ struct	s_philosopher
 */
 
 t_philosopher	*g_hoomans;
+
+void	*philo_main(t_philosopher *this);
 
 /*
 ** Creates a gathering of little men.

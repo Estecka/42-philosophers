@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:48:04 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/13 15:08:39 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void		*philo_main(t_philosopher *this)
-{
-	__useconds_t	date;
-	unsigned int	datems;
-
-	printf("\nI think, therefore I am n°%i\n", this->uid);
-	while (this->status != phi_dead)
-	{
-		date = stopwatch_date();
-		if (this->ttaction < date)
-		{
-			datems = date / 1000;
-			printf("[%4u] %i had a thought\n",
-			datems, this->uid);
-			this->ttaction = (1000 * datems) + g_ttsleep;
-		}
-	}
-	printf("\nOh noes. I, n°%i, no longer thinks, and therefore, is no more.\
-	*dies in philosopher*\n", this->uid);
-	return (NULL);
-}
-
 /*
 ** Kills all philosophers and wait for them to die out.
 ** @param int count	The amount of philosophers to kill.
@@ -54,6 +32,8 @@ static void		simulation_abort(int count)
 {
 	int	i;
 
+	g_sim_status = sim_stopped;
+	dprintf(STDERR_FILENO, "%5i Simulation stopped\n", stopwatch_date() / 1000);
 	i = -1;
 	while (++i < count)
 	{
@@ -71,6 +51,7 @@ static short	simulation_init(void)
 	unsigned int	i;
 	signed int		status;
 
+	g_sim_status = sim_playing;
 	i = -1;
 	while (++i < g_philocount)
 	{
@@ -93,8 +74,7 @@ extern short	simulation_main(void)
 		write(STDERR_FILENO, "Thread initialisation failed.\n", 31);
 		return (EXIT_FAILURE);
 	}
-	while (stopwatch_date() < g_ttdie)
-		continue ;
+	wait_until(g_ttdie);
 	simulation_abort(g_philocount);
 	return (EXIT_SUCCESS);
 }
