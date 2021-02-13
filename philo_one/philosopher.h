@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 15:51:49 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/13 17:05:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ enum	e_phistatus
 ** @var int ttdie	The date in microseconds when the philosopher will starve.
 ** @var t_mutex[2] hands	A pointer to the eating ustensiles the philosopher h
 ** as grabbed. 0 is its right hand, and 1 its left hand.
+** @var t_mutex self	A mutex protecting some of the philosopher's variables.
+** 	Locking this mutex grants access to `meal`, `ttaction` and `ttdie`.
+** 	The main thread require this lock to read, but may not write in any case.
+** 	The philosopher's thread require this lock to write, but may read without lo
+** cking.
 */
 
 typedef struct s_philosopher	t_philosopher;
@@ -47,6 +52,7 @@ struct	s_philosopher
 	__useconds_t	ttaction;
 	__useconds_t	ttdie;
 	pthread_mutex_t	*hands[2];
+	pthread_mutex_t	self;
 };
 
 /*
