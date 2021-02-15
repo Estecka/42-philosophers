@@ -5,6 +5,7 @@ HDRS = \
 	philosopher.h \
 	simulation.h \
 	sustenance_ustensile.h \
+	thanatos.h \
 
 SRCS = \
 	main.c \
@@ -14,6 +15,7 @@ SRCS = \
 	philosopher_main.c \
 	simulation.c \
 	sustenance_ustensile.c \
+	thanatos.c \
 
 LIBS = \
 	minilibft/libminift.a \

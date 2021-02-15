@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/13 15:08:39 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 19:03:34 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@
 #include "chronos.h"
 #include "philosopher.h"
 #include "sustenance_ustensile.h"
+#include "thanatos.h"
 #include "minilibft/minilibft.h"
 
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+extern void		simulation_emergency_brakes(void)
+{
+	g_sim_status = sim_stopped;
+	dprintf(STDERR_FILENO, "%5u Simulation stopped\n", stopwatch_date() / 1000);
+}
 
 /*
 ** Kills all philosophers and wait for them to die out.
@@ -32,8 +39,7 @@ static void		simulation_abort(int count)
 {
 	int	i;
 
-	g_sim_status = sim_stopped;
-	dprintf(STDERR_FILENO, "%5i Simulation stopped\n", stopwatch_date() / 1000);
+	simulation_emergency_brakes();
 	i = -1;
 	while (++i < count)
 	{
@@ -68,13 +74,16 @@ static short	simulation_init(void)
 
 extern short	simulation_main(void)
 {
+	__useconds_t	next_check;
+
 	stopwatch_start();
 	if (!simulation_init())
 	{
 		write(STDERR_FILENO, "Thread initialisation failed.\n", 31);
 		return (EXIT_FAILURE);
 	}
-	wait_until(g_ttdie);
+	while ((next_check = watch_over_mortals()))
+		wait_until(next_check);
 	simulation_abort(g_philocount);
 	return (EXIT_SUCCESS);
 }
