@@ -6,13 +6,13 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:29:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:30:22 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 14:12:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-extern size_t	ministrlen(const char *str)
+extern size_t		ministrlen(const char *str)
 {
 	size_t	len;
 
@@ -22,7 +22,7 @@ extern size_t	ministrlen(const char *str)
 	return (len);
 }
 
-extern int		miniatoi(const char *arg)
+extern int			miniatoi(const char *arg)
 {
 	int result;
 
@@ -35,7 +35,7 @@ extern int		miniatoi(const char *arg)
 	return (result);
 }
 
-extern short	isnumber(const char *arg)
+extern short		isnumber(const char *arg)
 {
 	while (*arg)
 	{
@@ -44,4 +44,20 @@ extern short	isnumber(const char *arg)
 		arg++;
 	}
 	return (TRUE);
+}
+
+extern __useconds_t	smallest(__useconds_t a, __useconds_t b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
+extern __useconds_t	greatest(__useconds_t a, __useconds_t b)
+{
+	if (a < b)
+		return (b);
+	else
+		return (a);
 }

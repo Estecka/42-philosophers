@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:07:46 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/13 16:58:46 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/14 16:05:18 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static short	philo_mutex_init(int count)
 	while (++i < count)
 	{
 		if (0 != pthread_mutex_init(&g_hoomans[i].self, NULL))
-			{
-				philo_mutex_abort(i);
-				free(g_hoomans);
-				return (FALSE);
-			}
+		{
+			philo_mutex_abort(i);
+			free(g_hoomans);
+			return (FALSE);
+		}
 	}
 	return (TRUE);
 }

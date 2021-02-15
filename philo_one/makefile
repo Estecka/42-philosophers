@@ -1,6 +1,7 @@
 HDRS = \
 	main.h \
 	chronos.h \
+	fated_list_of_minor_prophecies.h \
 	philosopher.h \
 	simulation.h \
 	sustenance_ustensile.h \
@@ -8,6 +9,7 @@ HDRS = \
 SRCS = \
 	main.c \
 	chronos.c \
+	fates.c \
 	philosopher.c \
 	philosopher_main.c \
 	simulation.c \
@@ -28,7 +30,7 @@ CC = clang
 ${NAME}: ${OBJS}
 	${CC} ${OBJS} ${LIBS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
 
-${OBJS}: ${HDRS}
+${OBJS}: ${HDRS} ${LIBS}
 
 %.a: sub_makefile
 	make $(@F) -C $(@D)

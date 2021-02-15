@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/13 17:13:42 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/14 16:13:26 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	philo_eat(t_philosopher *this)
 	ttactionms = this->ttaction / 1000;
 	wait_until(this->ttaction);
 	this->ttdie = this->ttaction + g_ttdie;
+	this->meals++;
 	if (g_sim_status == sim_playing)
 	{
 		printf("%5i %i is sleeping\n", ttactionms, this->uid);
