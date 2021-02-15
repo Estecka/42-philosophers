@@ -29,10 +29,21 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS = -lpthread
 CC = clang
 
+
 ${NAME}: ${OBJS}
 	${CC} ${OBJS} ${LIBS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
 
 ${OBJS}: ${HDRS} ${LIBS}
+
+
+chronos: chronos.out
+chronos.out: chronos.c chronos_test_main.c ${LIBS} chronos.h 
+	${CC} chronos.c chronos_test_main.c ${LIBS} \
+		-o chronos.out \
+		-Wall -Wextra \
+		-lpthread \
+		;
+
 
 %.a: sub_makefile
 	make $(@F) -C $(@D)
@@ -50,3 +61,4 @@ re: fclean all
 .PHONY: \
 	re all clean fclean \
 	sub_makefile \
+	chronos \

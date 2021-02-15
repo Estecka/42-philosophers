@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/13 14:26:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 21:01:31 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@
 void			stopwatch_start(void);
 
 /*
-** Gives the time in microseconds since the beginning.
+** Gives the date in microseconds since the origin of times.
 */
 
 __useconds_t	stopwatch_date(void);
 
 /*
 ** Blocks the thread until the given date is reached.
-** @param __useconds_t date	The date to wait for
+** @param __useconds_t date	The date to wait for.
+** @return __useconds_t	The date when the function returned.
 */
 
-void			wait_until(__useconds_t date);
+__useconds_t	wait_until(__useconds_t date);
 
 #endif

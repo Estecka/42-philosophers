@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/13 15:12:56 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 21:25:59 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#define WAITSAFEFTYBUFFER 10000
+#define WAITSAFEFTYBUFFER 0
 
 static struct timeval	g_origin;
 
@@ -42,18 +42,19 @@ extern __useconds_t		stopwatch_date(void)
 	+ (date.tv_usec - g_origin.tv_usec);
 }
 
-extern void				wait_until(__useconds_t target_date)
+extern __useconds_t		wait_until(__useconds_t target_date)
 {
 	__useconds_t current_date;
 	__useconds_t sleep_date;
 
-	if (WAITSAFEFTYBUFFER < target_date)
+	if (0 <= WAITSAFEFTYBUFFER && WAITSAFEFTYBUFFER < target_date)
 	{
 		sleep_date = target_date - WAITSAFEFTYBUFFER;
 		current_date = stopwatch_date();
 		if (current_date < sleep_date)
 			usleep(sleep_date - current_date);
 	}
-	while (stopwatch_date() < target_date)
+	while ((current_date = stopwatch_date()) < target_date)
 		continue ;
+	return (current_date);
 }
