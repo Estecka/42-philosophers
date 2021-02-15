@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 19:05:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 19:15:33 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 	if (philo->ttdie <= current_date)
 	{
 		simulation_emergency_brakes();
-		printf("%5u %i has died.\n", current_date, philo->uid);
+		printf("%5u %i has died.\n", current_date / 1000, philo->uid);
 		dst->isdead = TRUE;
 		dst->next_check = current_date;
 		pthread_mutex_unlock(&philo->self);

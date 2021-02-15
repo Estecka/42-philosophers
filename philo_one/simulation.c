@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 19:03:34 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/15 19:28:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		simulation_abort(int count)
 {
 	int	i;
 
-	simulation_emergency_brakes();
+	g_sim_status = sim_stopped;
 	i = -1;
 	while (++i < count)
 	{
