@@ -6,11 +6,12 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 19:20:06 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/16 16:02:34 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+#include "philosopher_ustensile.h"
 
 #include "chronos.h"
 #include "main.h"
@@ -41,15 +42,15 @@ static void	philo_sleep(t_philosopher *this)
 
 static void	philo_think(t_philosopher *this)
 {
-	int	ttactionms;
+	__useconds_t	date;
 
-	ttactionms = this->ttaction / 1000;
-	wait_until(this->ttaction);
+	philo_grab_ustensiles(this);
 	pthread_mutex_lock(&this->self);
+	date = stopwatch_date();
 	if (g_sim_status == sim_playing)
 	{
-		printf("%5i %i is eating\n", ttactionms, this->uid);
-		this->ttaction += g_tteat;
+		printf("%5i %i is eating\n", date / 1000, this->uid);
+		this->ttaction = date + g_tteat;
 		this->status = phi_eating;
 	}
 	else
@@ -64,6 +65,7 @@ static void	philo_eat(t_philosopher *this)
 	ttactionms = this->ttaction / 1000;
 	wait_until(this->ttaction);
 	pthread_mutex_lock(&this->self);
+	philo_drop_ustensiles(this);
 	this->ttdie = this->ttaction + g_ttdie;
 	this->meals++;
 	if (g_sim_status == sim_playing)
@@ -90,5 +92,6 @@ extern void	*philo_main(t_philosopher *this)
 		else
 			break ;
 	}
+	philo_drop_ustensiles(this);
 	return (NULL);
 }

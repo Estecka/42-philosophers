@@ -3,6 +3,7 @@ HDRS = \
 	chronos.h \
 	fated_list_of_minor_prophecies.h \
 	philosopher.h \
+	philosopher_ustensile.h \
 	simulation.h \
 	sustenance_ustensile.h \
 	thanatos.h \
@@ -13,6 +14,7 @@ SRCS = \
 	fates.c \
 	philosopher.c \
 	philosopher_main.c \
+	philosopher_ustensile.c \
 	simulation.c \
 	sustenance_ustensile.c \
 	thanatos.c \

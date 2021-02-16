@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 21:25:59 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/16 16:15:46 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#define WAITSAFEFTYBUFFER 0
+#define WAITSAFEFTYBUFFER 1000
 
 static struct timeval	g_origin;
 
