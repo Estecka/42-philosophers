@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:30:37 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/16 15:36:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,41 @@ static short	parseusec(const char *arg, __useconds_t *dst)
 	return (TRUE);
 }
 
-extern int		main(int argc, char **argv)
+static short	parseargs(int argc, char **argv)
 {
-	int	status;
-
 	if (argc < 5 || 6 < argc)
 	{
-		write(STDERR_FILENO, "Invalid number of argument\n", 28);
-		return (EXIT_FAILURE);
+		write(STDERR_FILENO, "Invalid number of arguments.\n", 28);
+		return (FALSE);
 	}
 	if (!parseint(argv[1], &g_philocount)
 		|| !parseusec(argv[2], &g_ttdie)
 		|| !parseusec(argv[3], &g_tteat)
 		|| !parseusec(argv[4], &g_ttsleep)
-		|| (argc == 6 && !parseint(argv[5], (unsigned int*)&g_eatgoal))
-		|| !ustensile_init(g_philocount))
+		|| (argc == 6 && !parseint(argv[5], (unsigned int*)&g_eatgoal)))
+		return (FALSE);
+	if (g_philocount < 2)
+	{
+		write(STDERR_FILENO, "Not enough philosophers.\n", 26);
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+extern int		main(int argc, char **argv)
+{
+	int	status;
+
+	if (!parseargs(argc, argv))
 		return (EXIT_FAILURE);
+	if (!ustensile_init(g_philocount))
+	{
+		write(STDERR_FILENO, "Init error.\n", 13);
+		return (EXIT_FAILURE);
+	}
 	if (!philo_init(g_philocount))
 	{
+		write(STDERR_FILENO, "Init error.\n", 13);
 		ustensile_deinit();
 		return (EXIT_FAILURE);
 	}

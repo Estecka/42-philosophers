@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:52:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 21:21:19 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/16 15:36:20 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*thread_main(void *uid)
 		target_date = stopwatch_date() + g_sleeptime;
 		wake_date = wait_until(target_date);
 		printf("%i Latency: %+.3f ms\n", (int)uid,
-			(wake_date - target_date)/(float)1000);
+			(wake_date - target_date) / (float)1000);
 	}
 }
 
@@ -45,7 +45,7 @@ extern int	main(int argc, char **args)
 		miniatoi(args[2]) * 1000 :
 		1000000;
 	stopwatch_start();
-	while(threads--)
+	while (threads--)
 		pthread_create(&trashbin, NULL, &thread_main, (void*)threads);
 	thread_main(0);
 }
