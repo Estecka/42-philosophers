@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/16 16:17:15 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/17 16:10:36 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*philo_main(t_philosopher *this);
 
 /*
 ** Creates a gathering of little men.
-** Their first action upon being born will be waking up.
+** Philosophers are marked as dead until their thread is started.
 */
 
 short	philo_init(int count);

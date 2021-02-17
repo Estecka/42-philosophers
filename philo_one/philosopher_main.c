@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/16 16:02:34 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/17 16:11:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	philo_eat(t_philosopher *this)
 
 extern void	*philo_main(t_philosopher *this)
 {
+	this->status = phi_sleeping;
 	while (g_sim_status == sim_playing)
 	{
 		if (this->status == phi_eating)

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 19:28:40 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/17 16:16:39 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,43 +32,54 @@ extern void		simulation_emergency_brakes(void)
 
 /*
 ** Kills all philosophers and wait for them to die out.
-** @param int count	The amount of philosophers to kill.
 */
 
-static void		simulation_abort(int count)
+static void		simulation_abort()
 {
-	int	i;
+	unsigned int	i;
 
 	g_sim_status = sim_stopped;
 	i = -1;
-	while (++i < count)
+	while (++i < g_philocount)
 	{
-		g_hoomans[i].status = phi_dead;
-		if (g_hoomans[i].thread != (pthread_t){ 0 })
+		if (g_hoomans->status != phi_dead)
 		{
+			g_hoomans[i].status = phi_dead;
 			pthread_join(g_hoomans[i].thread, NULL);
 			g_hoomans[i].thread = (pthread_t){ 0 };
 		}
 	}
 }
 
+static short	simulation_init_one(int	i)
+{
+	signed int	status;
+
+	g_hoomans[i].status = phi_sleeping;
+	status = pthread_create(&g_hoomans[i].thread, NULL,
+		(void*(*)(void*))&philo_main, &g_hoomans[i]);
+	if (status < 0)
+	{
+		g_hoomans[i].status = phi_dead;
+		simulation_abort();
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
 static short	simulation_init(void)
 {
 	unsigned int	i;
-	signed int		status;
 
 	g_sim_status = sim_playing;
 	i = -1;
-	while (++i < g_philocount)
-	{
-		status = pthread_create(&g_hoomans[i].thread, NULL,
-			(void*(*)(void*))&philo_main, &g_hoomans[i]);
-		if (status < 0)
-		{
-			simulation_abort(i);
+	while ((i += 2) < g_philocount)
+		if (!simulation_init_one(i))
 			return (FALSE);
-		}
-	}
+	i = -2;
+	while ((i += 2) < g_philocount)
+		if (!simulation_init_one(i))
+			return (FALSE);
 	return (TRUE);
 }
 
@@ -84,6 +95,6 @@ extern short	simulation_main(void)
 	}
 	while ((next_check = watch_over_mortals()))
 		wait_until(next_check);
-	simulation_abort(g_philocount);
+	simulation_abort();
 	return (EXIT_SUCCESS);
 }

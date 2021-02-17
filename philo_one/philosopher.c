@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:07:46 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/16 16:04:09 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/17 16:09:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ extern short	philo_init(int count)
 	{
 		g_hoomans[i].uid = i;
 		g_hoomans[i].thread = (pthread_t){ 0 };
-		g_hoomans[i].status = phi_sleeping;
+		g_hoomans[i].status = phi_dead;
 		g_hoomans[i].meals = 0;
 		g_hoomans[i].ttaction = 0;
 		g_hoomans[i].ttdie = g_ttdie;
