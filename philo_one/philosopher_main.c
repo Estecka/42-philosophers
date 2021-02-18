@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/17 16:11:12 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/17 16:56:13 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@
 
 static void	philo_sleep(t_philosopher *this)
 {
-	int	ttactionms;
+	int				ttactionms;
+	__useconds_t	date;
 
 	ttactionms = this->ttaction / 1000;
-	wait_until(this->ttaction);
+	date = wait_until(this->ttaction);
 	pthread_mutex_lock(&this->self);
 	if (g_sim_status == sim_playing)
 	{
-		printf("%5i %i is thinking\n", ttactionms, this->uid);
+		printf("%5i %i is thinking	(+%.3f)\n",
+			ttactionms, this->uid, (date - this->ttaction) / (float)1000);
 		this->ttaction += g_ttsleep;
 		this->status = phi_thinking;
 	}
@@ -60,17 +62,19 @@ static void	philo_think(t_philosopher *this)
 
 static void	philo_eat(t_philosopher *this)
 {
-	int	ttactionms;
+	int				ttactionms;
+	__useconds_t	date;
 
 	ttactionms = this->ttaction / 1000;
-	wait_until(this->ttaction);
-	pthread_mutex_lock(&this->self);
+	date = wait_until(this->ttaction);
 	philo_drop_ustensiles(this);
+	pthread_mutex_lock(&this->self);
 	this->ttdie = this->ttaction + g_ttdie;
 	this->meals++;
 	if (g_sim_status == sim_playing)
 	{
-		printf("%5i %i is sleeping\n", ttactionms, this->uid);
+		printf("%5i %i is sleeping	(+%.3f)\n",
+			ttactionms, this->uid, (date - this->ttaction) / (float)1000);
 		this->ttaction += g_ttsleep;
 		this->status = phi_sleeping;
 	}

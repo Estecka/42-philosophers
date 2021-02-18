@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/17 16:16:39 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/18 15:37:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ extern void		simulation_emergency_brakes(void)
 ** Kills all philosophers and wait for them to die out.
 */
 
-static void		simulation_abort()
+static void		simulation_abort(void)
 {
 	unsigned int	i;
 
@@ -51,7 +51,7 @@ static void		simulation_abort()
 	}
 }
 
-static short	simulation_init_one(int	i)
+static short	simulation_init_one(int i)
 {
 	signed int	status;
 
