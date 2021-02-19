@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/18 17:13:19 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/19 15:59:30 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define MS2USEC 1000
 # define USEC2MS 0.001
+
+float			g_perfs;
 
 void			stopwatch_start(void);
 

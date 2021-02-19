@@ -11,6 +11,7 @@ HDRS = \
 SRCS = \
 	main.c \
 	chronos.c \
+	chronos_wait.c \
 	fates.c \
 	philosopher.c \
 	philosopher_main.c \
@@ -39,8 +40,8 @@ ${OBJS}: ${HDRS} ${LIBS}
 
 
 chronos: chronos.out
-chronos.out: chronos.c chronos_test_main.c ${LIBS} chronos.h 
-	${CC} chronos.c chronos_test_main.c ${LIBS} \
+chronos.out: chronos.c chronos_wait.c chronos_test_main.c ${LIBS} chronos.h 
+	${CC} chronos.c chronos_wait.c chronos_test_main.c ${LIBS} \
 		-o chronos.out \
 		-Wall -Wextra \
 		-lpthread \

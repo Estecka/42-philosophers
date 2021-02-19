@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 15:24:31 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/19 16:02:05 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-#define FRAMEPERIOD 1000
+#define FRAMEPERIOD 499
 #define PERF_MAX    1.5
 #define PERF_MIN    0.8
 
@@ -30,7 +30,7 @@ static struct timeval	g_origin;
 static __useconds_t		g_date[2];
 static unsigned short	g_i;
 
-static float			g_perfs = 1.2;
+float					g_perfs = 1.2;
 static __useconds_t		g_prev_perfcheck = 0;
 static __useconds_t		g_next_perfcheck = 2000000;
 
@@ -42,7 +42,8 @@ static void				compute_perfs(void)
 	gettimeofday(&current_time, NULL);
 	true_time = (current_time.tv_usec - g_origin.tv_usec)
 		+ ((current_time.tv_sec - g_origin.tv_sec) * 1000000);
-	g_perfs = (float)(true_time - g_prev_perfcheck) / (g_date[g_i] - g_prev_perfcheck);
+	g_perfs = (float)(true_time - g_prev_perfcheck)
+		/ (g_date[g_i] - g_prev_perfcheck);
 	g_perfs = clamp(g_perfs, PERF_MIN, PERF_MAX);
 	dprintf(STDERR_FILENO, "%5u Performance: %f\n", true_time / 1000, g_perfs);
 	g_prev_perfcheck = g_next_perfcheck;
@@ -55,8 +56,8 @@ static void				*stopwatch_main(void *arg)
 	gettimeofday(&g_origin, NULL);
 	while (g_isrunning)
 	{
-		usleep(FRAMEPERIOD);
-		g_date[!g_i] = g_date[g_i] + (FRAMEPERIOD * g_perfs);
+		usleep(FRAMEPERIOD / g_perfs);
+		g_date[!g_i] = g_date[g_i] + FRAMEPERIOD;
 		g_i = !g_i;
 		if (g_next_perfcheck < g_date[g_i])
 			compute_perfs();
@@ -86,13 +87,4 @@ extern void				stopwatch_stop(void)
 extern __useconds_t		stopwatch_date(void)
 {
 	return (g_date[g_i]);
-}
-
-extern __useconds_t		wait_until(__useconds_t target_date)
-{
-	__useconds_t	current_date;
-
-	while ((current_date = stopwatch_date()) < target_date)
-		usleep(smallest(1000, target_date - current_date) * g_perfs);
-	return (stopwatch_date());
 }

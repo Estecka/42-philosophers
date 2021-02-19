@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   chronos_wait.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 14:47:03 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 16:02:37 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/19 15:56:45 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/19 16:02:17 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibft.h"
+#include "chronos.h"
 
-extern float	clamp(float v, float min, float max)
-{
-	if (v < min)
-		return (min);
-	if (max < v)
-		return (max);
-	return (v);
-}
+#include "minilibft/minilibft.h"
 
-extern float	min(float a, float b)
+extern __useconds_t		wait_until(__useconds_t target_date)
 {
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
+	__useconds_t	current_date;
 
-extern float	max(float a, float b)
-{
-	if (a < b)
-		return (b);
-	else
-		return (a);
+	while ((current_date = stopwatch_date()) < target_date)
+		usleep(smallest(250, target_date - current_date) * g_perfs);
+	return (stopwatch_date());
 }
