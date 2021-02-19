@@ -3,6 +3,7 @@ HDRS = \
 
 SRCS = \
 	minilibft.c \
+	math.c \
 
 OBJS = ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:52:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/18 15:21:29 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/19 15:26:35 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ extern int	main(int argc, char **args)
 	pthread_t		trashbin;
 
 	threads = (argc >= 2) ?
-		greatest(1, miniatoi(args[1])) :
+		greatest(0, miniatoi(args[1])) :
 		0;
 	g_sleeptime = (argc >= 3) ?
 		miniatoi(args[2]) * 1000 :
