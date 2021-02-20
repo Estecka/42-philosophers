@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 15:59:30 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:22:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define USEC2MS 0.001
 
 float			g_perfs;
+unsigned short	g_stopwatch_running;
 
 void			stopwatch_start(void);
 

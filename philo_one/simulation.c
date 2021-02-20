@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/18 18:29:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:25:07 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 extern void		simulation_emergency_brakes(void)
 {
-	stopwatch_stop();
 	g_sim_status = sim_stopped;
+	stopwatch_stop();
 	dprintf(STDERR_FILENO, "%5u Simulation stopped\n", stopwatch_date() / 1000);
 }
 
