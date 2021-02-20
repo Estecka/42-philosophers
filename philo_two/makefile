@@ -26,7 +26,7 @@ LIBS = \
 
 OBJS = ${SRCS:.c=.o}
 
-NAME = philo_one
+NAME = philo_two
 
 CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS = -lpthread
