@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/17 15:48:12 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:11:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,11 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 		pthread_mutex_unlock(&philo->self);
 		return (FALSE);
 	}
-	else
-		dst->isdead = FALSE;
-	if (0 <= g_eatgoal && g_eatgoal <= (int)philo->meals)
-		dst->isfulfilled = TRUE;
-	else
-		dst->isfulfilled = FALSE;
+	dst->isfulfilled = (0 <= g_eatgoal && (g_eatgoal <= (int)philo->meals));
+	pthread_mutex_unlock(&philo->self);
+	dst->isdead = FALSE;
 	dst->next_check =
 		smallest(philo_starve_date(philo), philo_stuffed_date(philo));
-	pthread_mutex_unlock(&philo->self);
 	return (TRUE);
 }
 

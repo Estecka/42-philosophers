@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 14:48:38 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 13:56:55 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:15:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern __useconds_t	philo_stuffed_date(t_philosopher *this)
 
 	if (g_eatgoal < 0)
 		return (-1);
-	else if (this->meals <= (unsigned int)g_eatgoal)
+	else if (g_eatgoal <= (int)this->meals)
 		return (0);
 	result = (g_tteat + g_ttsleep) * (g_eatgoal - this->meals - 1);
 	if (this->status == phi_eating)
