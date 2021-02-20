@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:37:31 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:44:48 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 	dst->isdead = FALSE;
 	dst->next_check = philo_starve_date(philo);
 	if (!dst->isfulfilled)
+	{
 		dst->next_check = smallest(dst->next_check, philo_stuffed_date(philo));
+		dst->next_check = greatest(dst->next_check, 10000);
+	}
 	return (TRUE);
 }
 
@@ -61,8 +64,6 @@ extern __useconds_t	watch_over_mortals(void)
 			return (0);
 		allfulfilled &= medcheck.isfulfilled;
 		next_check = smallest(next_check, medcheck.next_check);
-		if (!medcheck.next_check && !medcheck.isdead)
-			printf("Something unexpected happened. This is a crash.\n");
 	}
 	if (allfulfilled)
 	{
