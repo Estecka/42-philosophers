@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:11:47 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/20 17:37:31 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 	dst->isfulfilled = (0 <= g_eatgoal && (g_eatgoal <= (int)philo->meals));
 	pthread_mutex_unlock(&philo->self);
 	dst->isdead = FALSE;
-	dst->next_check =
-		smallest(philo_starve_date(philo), philo_stuffed_date(philo));
+	dst->next_check = philo_starve_date(philo);
+	if (!dst->isfulfilled)
+		dst->next_check = smallest(dst->next_check, philo_stuffed_date(philo));
 	return (TRUE);
 }
 
@@ -60,11 +61,14 @@ extern __useconds_t	watch_over_mortals(void)
 			return (0);
 		allfulfilled &= medcheck.isfulfilled;
 		next_check = smallest(next_check, medcheck.next_check);
+		if (!medcheck.next_check && !medcheck.isdead)
+			printf("Something unexpected happened. This is a crash.\n");
 	}
 	if (allfulfilled)
 	{
 		simulation_emergency_brakes();
-		dprintf(STDERR_FILENO, "All philosophers are fulfilled.\n");
+		printf("%5u All philosophers are fulfilled.\n",
+			stopwatch_date() / 1000);
 		return (0);
 	}
 	return (next_check);
