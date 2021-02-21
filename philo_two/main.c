@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/16 15:36:40 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/21 22:04:50 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include "simulation.h"
 #include "sustenance_ustensile.h"
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 int				g_eatgoal = -1;
@@ -76,12 +78,12 @@ extern int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!ustensile_init(g_philocount))
 	{
-		write(STDERR_FILENO, "Init error.\n", 13);
+		dprintf(STDERR_FILENO, "Ustensiles init error: %s\n", strerror(errno));
 		return (EXIT_FAILURE);
 	}
 	if (!philo_init(g_philocount))
 	{
-		write(STDERR_FILENO, "Init error.\n", 13);
+		write(STDERR_FILENO, "Philo init error.\n", 19);
 		ustensile_deinit();
 		return (EXIT_FAILURE);
 	}
