@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:41:49 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/21 21:24:36 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include "sustenance_ustensile.h"
 #include "minilibft/minilibft.h"
 
+#include <fcntl.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+
+#ifdef philo_one
 
 static void		ustensile_abort(int count)
 {
@@ -51,3 +55,25 @@ extern short	ustensile_init(int count)
 	}
 	return (TRUE);
 }
+
+#else
+
+extern void		ustensile_deinit(void)
+{
+	sem_unlink("Instruments of Sustenance");
+	g_ustensiles = NULL;
+}
+
+extern short	ustensile_init(int count)
+{
+	g_ustensiles = sem_open("Instruments of Sustenance",
+		O_CREAT | O_EXCL,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
+		count);
+	if (g_ustensiles == SEM_FAILED)
+		return (FALSE);
+	else
+		return (TRUE);
+}
+
+#endif
