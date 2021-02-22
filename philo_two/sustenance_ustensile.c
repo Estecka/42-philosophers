@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/21 22:07:18 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/22 14:30:27 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,24 @@ extern void			ustensile_deinit(void)
 	g_ustensiles = NULL;
 }
 
-static inline void	ustensile_sem_init(int count)
+extern short		ustensile_init(int count)
 {
 	g_ustensiles = sem_open("Instruments of Sustenance",
 		O_CREAT | O_EXCL,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
 		count);
-}
-
-extern short		ustensile_init(int count)
-{
-	ustensile_sem_init(count);
 	if (g_ustensiles == SEM_FAILED && errno == EEXIST)
 	{
-		dprintf(STDERR_FILENO, "Warning: A semaphore appears to have been impro\
-perly closed. Attempting to fix...\n");
 		g_ustensiles = sem_open("Instruments of Sustenance", 0);
 		if (g_ustensiles == SEM_FAILED)
-		{
-			dprintf(STDERR_FILENO, "Fatal: Errno %s\n", strerror(errno));
 			return (FALSE);
-		}
-		if (sem_close(g_ustensiles) < 0)
-		{
-			dprintf(STDERR_FILENO, "Couldn't close the Semaphore: %s\n",
-				strerror(errno));
-			return (FALSE);
-		}
-		g_ustensiles = NULL;
-		ustensile_sem_init(count);
+		if (sem_unlink("Instruments of Sustenance") < 0)
+			return (FALSE) & dprintf(STDERR_FILENO, "Fatal: A semaphore alread\
+y existed and couldn't be properly closed. %s\n", strerror(errno));
+			g_ustensiles = sem_open("Instruments of Sustenance",
+			O_CREAT | O_EXCL,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
+			count);
 	}
 	if (g_ustensiles == SEM_FAILED)
 		return (FALSE);
