@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/21 22:04:50 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/22 15:49:20 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@
 #include <unistd.h>
 
 int				g_eatgoal = -1;
+
+#ifdef philo_one
+
+static char		*g_philo_variant = "philo_one";
+
+#elif defined philo_two
+
+static char		*g_philo_variant = "philo_two";
+
+#elif defined philo_three
+
+static char		*g_philo_variant = "philo_three";
+
+#endif
 
 static short	parseint(const char *arg, unsigned int *dst)
 {
@@ -74,6 +88,7 @@ extern int		main(int argc, char **argv)
 {
 	int	status;
 
+	dprintf(STDERR_FILENO, "%s\n", g_philo_variant);
 	if (!parseargs(argc, argv))
 		return (EXIT_FAILURE);
 	if (!ustensile_init(g_philocount))

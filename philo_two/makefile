@@ -28,13 +28,13 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = philo_two
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D ${NAME}
 LIBFLAGS = -lpthread
 CC = clang
 
 
 ${NAME}: ${OBJS}
-	${CC} ${OBJS} ${LIBS} -o ${NAME} ${CFLAGS} ${LIBFLAGS} -D ${NAME}
+	${CC} ${OBJS} ${LIBS} -o ${NAME} ${CFLAGS} ${LIBFLAGS}
 
 ${OBJS}: ${HDRS} ${LIBS}
 
