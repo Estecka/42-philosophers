@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:41:49 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/22 14:30:27 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 #include "sustenance_ustensile.h"
 #include "minilibft/minilibft.h"
 
+#include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
 
-static void		ustensile_abort(int count)
+#ifdef philo_one
+
+static void			ustensile_abort(int count)
 {
 	int	i;
 
@@ -26,13 +33,13 @@ static void		ustensile_abort(int count)
 	free(g_ustensiles);
 }
 
-extern void		ustensile_deinit(void)
+extern void			ustensile_deinit(void)
 {
 	if (g_ustensiles)
 		ustensile_abort(g_philocount);
 }
 
-extern short	ustensile_init(int count)
+extern short		ustensile_init(int count)
 {
 	int	i;
 	int	status;
@@ -51,3 +58,39 @@ extern short	ustensile_init(int count)
 	}
 	return (TRUE);
 }
+
+#else
+
+extern void			ustensile_deinit(void)
+{
+	sem_unlink("Instruments of Sustenance");
+	sem_close(g_ustensiles);
+	g_ustensiles = NULL;
+}
+
+extern short		ustensile_init(int count)
+{
+	g_ustensiles = sem_open("Instruments of Sustenance",
+		O_CREAT | O_EXCL,
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
+		count);
+	if (g_ustensiles == SEM_FAILED && errno == EEXIST)
+	{
+		g_ustensiles = sem_open("Instruments of Sustenance", 0);
+		if (g_ustensiles == SEM_FAILED)
+			return (FALSE);
+		if (sem_unlink("Instruments of Sustenance") < 0)
+			return (FALSE) & dprintf(STDERR_FILENO, "Fatal: A semaphore alread\
+y existed and couldn't be properly closed. %s\n", strerror(errno));
+			g_ustensiles = sem_open("Instruments of Sustenance",
+			O_CREAT | O_EXCL,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
+			count);
+	}
+	if (g_ustensiles == SEM_FAILED)
+		return (FALSE);
+	else
+		return (TRUE);
+}
+
+#endif

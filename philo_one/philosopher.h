@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/17 16:10:36 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/21 16:00:34 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,18 @@ struct	s_philosopher
 	unsigned int	meals;
 	__useconds_t	ttaction;
 	__useconds_t	ttdie;
-	pthread_mutex_t	*hands[2];
 	pthread_mutex_t	self;
+
+# ifdef philo_one
+
+	pthread_mutex_t	*hands[2];
+
+# else
+
+	unsigned long	hands;
+
+# endif
+
 };
 
 /*

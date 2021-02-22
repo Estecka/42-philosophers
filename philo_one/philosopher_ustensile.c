@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:43:04 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/16 15:49:01 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/21 21:21:44 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include "main.h"
 #include "sustenance_ustensile.h"
+
+#ifdef philo_one
 
 extern void	philo_grab_ustensiles(t_philosopher *this)
 {
@@ -42,3 +44,24 @@ extern void	philo_drop_ustensiles(t_philosopher *this)
 	this->hands[0] = NULL;
 	this->hands[1] = NULL;
 }
+
+#else
+
+extern void	philo_grab_ustensiles(t_philosopher *this)
+{
+	sem_wait(g_ustensiles);
+	this->hands++;
+	sem_wait(g_ustensiles);
+	this->hands++;
+}
+
+extern void	philo_drop_ustensiles(t_philosopher *this)
+{
+	while (0 < this->hands)
+	{
+		sem_post(g_ustensiles);
+		this->hands--;
+	}
+}
+
+#endif
