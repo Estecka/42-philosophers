@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:22:19 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 15:08:43 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 19:54:48 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 size_t			ministrlen(const char *str);
 int				miniatoi(const char *arg);
+void			miniitoahex(char dst[5], unsigned int src);
 short			isnumber(const char *arg);
 __useconds_t	smallest(__useconds_t a, __useconds_t b);
 __useconds_t	greatest(__useconds_t a, __useconds_t b);

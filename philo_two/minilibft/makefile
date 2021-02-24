@@ -4,6 +4,7 @@ HDRS = \
 SRCS = \
 	minilibft.c \
 	math.c \
+	stringgen.c \
 
 OBJS = ${SRCS:.c=.o}
 

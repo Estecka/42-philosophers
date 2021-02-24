@@ -2,6 +2,7 @@ HDRS = \
 	main.h \
 	chronos.h \
 	fated_list_of_minor_prophecies.h \
+	omnilock.h \
 	philosopher.h \
 	philosopher_ustensile.h \
 	simulation.h \
@@ -13,6 +14,8 @@ SRCS = \
 	chronos.c \
 	chronos_wait.c \
 	fates.c \
+	omnilock.mutex.c \
+	omnilock.semaphore.c \
 	philosopher.c \
 	philosopher_main.c \
 	philosopher_ustensile.c \
