@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:44:48 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 20:00:17 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 {
 	__useconds_t		current_date;
 
-	pthread_mutex_lock(&philo->self);
+	omnilock_lockup(&philo->self);
 	current_date = stopwatch_date();
 	if (philo->ttdie <= current_date
 		&& !(philo->status == phi_eating && philo->ttaction <= philo->ttdie))
@@ -33,11 +33,11 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 		printf("%5u %i has died.\n", philo->ttdie / 1000, philo->uid);
 		dst->isdead = TRUE;
 		dst->next_check = current_date;
-		pthread_mutex_unlock(&philo->self);
+		omnilock_unlock(&philo->self);
 		return (FALSE);
 	}
 	dst->isfulfilled = (0 <= g_eatgoal && (g_eatgoal <= (int)philo->meals));
-	pthread_mutex_unlock(&philo->self);
+	omnilock_unlock(&philo->self);
 	dst->isdead = FALSE;
 	dst->next_check = philo_starve_date(philo);
 	if (!dst->isfulfilled)

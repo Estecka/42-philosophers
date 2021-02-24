@@ -6,13 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/21 16:00:34 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 20:00:51 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
+# include "omnilock.h"
 # include <pthread.h>
 
 typedef enum e_phistatus	t_phistatus;
@@ -35,11 +36,7 @@ enum	e_phistatus
 ** @var int ttdie	The date in microseconds when the philosopher will starve.
 ** @var t_mutex[2] hands	A pointer to the eating ustensiles the philosopher h
 ** as grabbed. 0 is its right hand, and 1 its left hand.
-** @var t_mutex self	A mutex protecting some of the philosopher's variables.
-** 	Locking this mutex grants access to `meal`, `ttaction` and `ttdie`.
-** 	The main thread require this lock to read, but may not write in any case.
-** 	The philosopher's thread require this lock to write, but may read without lo
-** cking.
+** @var t_omnilock self	A lock protecting some of the philosopher's variables.
 */
 
 typedef struct s_philosopher	t_philosopher;
@@ -51,7 +48,7 @@ struct	s_philosopher
 	unsigned int	meals;
 	__useconds_t	ttaction;
 	__useconds_t	ttdie;
-	pthread_mutex_t	self;
+	t_omnilock		self;
 
 # ifdef philo_one
 

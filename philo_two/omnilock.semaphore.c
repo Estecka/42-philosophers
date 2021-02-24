@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:24:51 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/24 19:55:00 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 19:57:50 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static unsigned int	g_semcount = 0x00000000;
 
-extern short		omnilock_mutexinit(t_omnilock *lock)
+extern short		omnilock_init(t_omnilock *lock)
 {
 	miniitoahex(lock->sem_uid, g_semcount++);
 	sem_unlink(lock->sem_uid);

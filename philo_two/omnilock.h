@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:13:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/24 19:53:11 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 19:57:30 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ struct	s_omnilock
 # endif
 };
 
-short	omnilock_mutexinit(t_omnilock *lock);
+short	omnilock_init(t_omnilock *lock);
 void	omnilock_deinit(t_omnilock *lock);
 void	omnilock_lockup(t_omnilock *lock);
 void	omnilock_unlock(t_omnilock *lock);

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:07:46 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/21 21:11:34 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 20:01:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		philo_mutex_abort(int count)
 	i = -1;
 	while (++i < count)
 	{
-		pthread_mutex_destroy(&g_hoomans[i].self);
+		omnilock_deinit(&g_hoomans[i].self);
 	}
 }
 
@@ -35,7 +35,7 @@ static short	philo_mutex_init(int count)
 	i = -1;
 	while (++i < count)
 	{
-		if (0 != pthread_mutex_init(&g_hoomans[i].self, NULL))
+		if (!omnilock_init(&g_hoomans[i].self))
 		{
 			philo_mutex_abort(i);
 			free(g_hoomans);
@@ -61,7 +61,6 @@ extern short	philo_init(int count)
 		g_hoomans[i].meals = 0;
 		g_hoomans[i].ttaction = 0;
 		g_hoomans[i].ttdie = g_ttdie;
-		g_hoomans[i].self = (pthread_mutex_t){ 0 };
 	}
 	return (philo_mutex_init(count));
 }

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 16:17:31 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 19:59:28 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	philo_sleep(t_philosopher *this)
 	__useconds_t	date;
 
 	date = wait_until(this->ttaction);
-	pthread_mutex_lock(&this->self);
+	omnilock_lockup(&this->self);
 	if (g_sim_status == sim_playing)
 	{
 		printf("%5i %i is thinking	(+%.3f)\n",
@@ -37,7 +37,7 @@ static void	philo_sleep(t_philosopher *this)
 	}
 	else
 		this->status = phi_dead;
-	pthread_mutex_unlock(&this->self);
+	omnilock_unlock(&this->self);
 }
 
 static void	philo_think(t_philosopher *this)
@@ -45,7 +45,7 @@ static void	philo_think(t_philosopher *this)
 	__useconds_t	date;
 
 	philo_grab_ustensiles(this);
-	pthread_mutex_lock(&this->self);
+	omnilock_lockup(&this->self);
 	date = stopwatch_date();
 	if (g_sim_status == sim_playing)
 	{
@@ -55,7 +55,7 @@ static void	philo_think(t_philosopher *this)
 	}
 	else
 		this->status = phi_dead;
-	pthread_mutex_unlock(&this->self);
+	omnilock_unlock(&this->self);
 }
 
 static void	philo_eat(t_philosopher *this)
@@ -64,7 +64,7 @@ static void	philo_eat(t_philosopher *this)
 
 	date = wait_until(this->ttaction);
 	philo_drop_ustensiles(this);
-	pthread_mutex_lock(&this->self);
+	omnilock_lockup(&this->self);
 	this->ttdie = this->ttaction + g_ttdie;
 	this->meals++;
 	if (g_sim_status == sim_playing)
@@ -76,7 +76,7 @@ static void	philo_eat(t_philosopher *this)
 	}
 	else
 		this->status = phi_dead;
-	pthread_mutex_unlock(&this->self);
+	omnilock_unlock(&this->self);
 }
 
 extern void	*philo_main(t_philosopher *this)
