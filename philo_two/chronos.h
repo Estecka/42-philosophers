@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:22:53 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/25 14:58:02 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define CHRONOS_H
 
 # include <unistd.h>
+
+/*
+** Either one of these should be defined:
+** FIXEDFRAMERATE, MACROSLEEP, or MICROSLEEP
+*/
+
+# define MACROSLEEP
 
 # define MS2USEC 1000
 # define USEC2MS 0.001

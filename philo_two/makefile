@@ -11,8 +11,9 @@ HDRS = \
 
 SRCS = \
 	main.c \
-	chronos.c \
-	chronos_wait.c \
+	chronos.fixedframerate.c \
+	chronos.sleep.c \
+	chronos_wait.fixedframerate.c \
 	fates.c \
 	omnilock.mutex.c \
 	omnilock.semaphore.c \
@@ -43,11 +44,11 @@ ${OBJS}: ${HDRS} ${LIBS}
 
 
 chronos: chronos.out
-chronos.out: chronos.c chronos_wait.c chronos_test_main.c ${LIBS} chronos.h 
-	${CC} chronos.c chronos_wait.c chronos_test_main.c ${LIBS} \
+chronos.out: chronos.*.c chronos_wait.*.c chronos_test_main.c ${LIBS} chronos.h 
+	${CC} chronos.*.c chronos_wait.*.c chronos_test_main.c ${LIBS} \
 		-o chronos.out \
 		-Wall -Wextra \
-		${LIBS} \
+		${LIBFLAGS} \
 		-D ${NAME} \
 		;
 

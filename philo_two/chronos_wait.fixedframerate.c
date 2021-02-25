@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chronos_wait.c                                     :+:      :+:    :+:   */
+/*   chronos_wait.fixedframerate.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:56:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:23:39 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/25 14:34:15 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chronos.h"
+
+#ifdef FIXEDFRAMERATE
 
 #include "minilibft/minilibft.h"
 
@@ -23,3 +25,5 @@ extern __useconds_t		wait_until(__useconds_t target_date)
 		usleep(smallest(250, target_date - current_date) * g_perfs);
 	return (stopwatch_date());
 }
+
+#endif

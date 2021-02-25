@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chronos.c                                          :+:      :+:    :+:   */
+/*   chronos.fixedframerate.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:23:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/25 14:12:57 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chronos.h"
 
-#include "minilibft/minilibft.h"
+#ifdef FIXEDFRAMERATE
 
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
+# include "minilibft/minilibft.h"
 
-#define FRAMEPERIOD 499
-#define PERF_MAX    1.5
-#define PERF_MIN    0.8
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+
+# define FRAMEPERIOD 499
+# define PERF_MAX    1.5
+# define PERF_MIN    0.8
 
 unsigned short			g_stopwatch_running = 0;
 static pthread_t		g_thread = (pthread_t){ 0 };
@@ -88,3 +90,5 @@ extern __useconds_t		stopwatch_date(void)
 {
 	return (g_date[g_i]);
 }
+
+#endif
