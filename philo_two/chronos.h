@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/25 14:58:02 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/25 17:01:04 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 /*
 ** Either one of these should be defined:
 ** FIXEDFRAMERATE, MACROSLEEP, or MICROSLEEP
+**
+** 	FIXEDFRAMERATE is the most reliable, but might be considered as cheating, be
+** cause it mostly uses simulated time instead of real time. Depending on the ma
+** chine's performance, it's susceptible to display noticeable bursts of overclo
+** cking/underclocking, or might fall behind considerably compared to real time.
+**
+** 	MACROSLEEP is more reliable for the VM, but in some rare cases it might stil
+** l oversleep for over 10ms.
+**
+** 	MICROSLEEP is more reliable on Guacamole, and doesn't seem to considerably o
+** versleep.
 */
 
 # define MACROSLEEP
