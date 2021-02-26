@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 14:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:54:47 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 17:46:28 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ extern useconds_t		wait_until(useconds_t target_date)
 {
 	useconds_t	current_date;
 
-	target_date -= target_date % 1000;
 	while ((current_date = stopwatch_date()) < target_date
 		&& g_stopwatch_running)
 		usleep(smallest(1000, target_date - current_date));

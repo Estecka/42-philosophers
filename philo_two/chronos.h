@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:40:39 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 17:12:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 ** versleep.
 */
 
-# define MACROSLEEP
+# define MICROSLEEP
 
 # define MS2USEC 1000
 # define USEC2MS 0.001
