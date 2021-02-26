@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 14:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:54:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ extern useconds_t		stopwatch_date(void)
 
 	gettimeofday(&current_time, NULL);
 	return ((current_time.tv_sec - g_origin.tv_sec) * 1000000)
-		+ (current_time.tv_usec - g_origin.tv_usec);
+	+ (current_time.tv_usec - g_origin.tv_usec);
 }
 
 # ifdef MACROSLEEP
@@ -51,7 +51,7 @@ extern useconds_t		wait_until(useconds_t target_date)
 	while ((current_date = stopwatch_date()) < target_date
 		&& g_stopwatch_running)
 		usleep(target_date - current_date);
-	return(current_date);
+	return (current_date);
 }
 
 # elif defined MICROSLEEP
@@ -64,7 +64,7 @@ extern useconds_t		wait_until(useconds_t target_date)
 	while ((current_date = stopwatch_date()) < target_date
 		&& g_stopwatch_running)
 		usleep(smallest(1000, target_date - current_date));
-	return(current_date);
+	return (current_date);
 }
 
 # endif

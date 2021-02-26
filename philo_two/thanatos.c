@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:53:07 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 extern useconds_t	watch_over_mortals(void)
 {
 	t_philo_medcheck	medcheck;
-	useconds_t		next_check;
+	useconds_t			next_check;
 	unsigned int		i;
 	short				allfulfilled;
 

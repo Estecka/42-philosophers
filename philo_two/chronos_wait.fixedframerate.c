@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:56:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:53:44 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #ifdef FIXEDFRAMERATE
 
-#include "minilibft/minilibft.h"
+# include "minilibft/minilibft.h"
 
 extern useconds_t		wait_until(useconds_t target_date)
 {
