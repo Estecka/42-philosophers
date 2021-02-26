@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 14:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/25 14:49:49 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ extern void				stopwatch_stop(void)
 	g_stopwatch_running = FALSE;
 }
 
-extern __useconds_t		stopwatch_date(void)
+extern useconds_t		stopwatch_date(void)
 {
 	struct timeval	current_time;
 
@@ -44,9 +44,9 @@ extern __useconds_t		stopwatch_date(void)
 
 # ifdef MACROSLEEP
 
-extern __useconds_t		wait_until(__useconds_t target_date)
+extern useconds_t		wait_until(useconds_t target_date)
 {
-	__useconds_t	current_date;
+	useconds_t	current_date;
 
 	while ((current_date = stopwatch_date()) < target_date
 		&& g_stopwatch_running)
@@ -56,9 +56,9 @@ extern __useconds_t		wait_until(__useconds_t target_date)
 
 # elif defined MICROSLEEP
 
-extern __useconds_t		wait_until(__useconds_t target_date)
+extern useconds_t		wait_until(useconds_t target_date)
 {
-	__useconds_t	current_date;
+	useconds_t	current_date;
 
 	target_date -= target_date % 1000;
 	while ((current_date = stopwatch_date()) < target_date

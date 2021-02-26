@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/24 19:59:28 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 static void	philo_sleep(t_philosopher *this)
 {
-	__useconds_t	date;
+	useconds_t	date;
 
 	date = wait_until(this->ttaction);
 	omnilock_lockup(&this->self);
@@ -42,7 +42,7 @@ static void	philo_sleep(t_philosopher *this)
 
 static void	philo_think(t_philosopher *this)
 {
-	__useconds_t	date;
+	useconds_t	date;
 
 	philo_grab_ustensiles(this);
 	omnilock_lockup(&this->self);
@@ -60,7 +60,7 @@ static void	philo_think(t_philosopher *this)
 
 static void	philo_eat(t_philosopher *this)
 {
-	__useconds_t	date;
+	useconds_t	date;
 
 	date = wait_until(this->ttaction);
 	philo_drop_ustensiles(this);

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:14:10 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/12 14:30:51 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:41:23 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 unsigned int	g_philocount;
 signed int		g_eatgoal;
-__useconds_t	g_ttdie;
-__useconds_t	g_tteat;
-__useconds_t	g_ttsleep;
+useconds_t		g_ttdie;
+useconds_t		g_tteat;
+useconds_t		g_ttsleep;
 
 #endif

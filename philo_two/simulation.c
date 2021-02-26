@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:25:07 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static short	simulation_init(void)
 
 extern short	simulation_main(void)
 {
-	__useconds_t	next_check;
+	useconds_t	next_check;
 
 	stopwatch_start();
 	if (!simulation_init())

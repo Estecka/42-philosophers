@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/24 20:00:51 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:41:48 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "omnilock.h"
 # include <pthread.h>
+# include <unistd.h>
 
 typedef enum e_phistatus	t_phistatus;
 enum	e_phistatus
@@ -46,8 +47,8 @@ struct	s_philosopher
 	pthread_t		thread;
 	t_phistatus		status;
 	unsigned int	meals;
-	__useconds_t	ttaction;
-	__useconds_t	ttdie;
+	useconds_t		ttaction;
+	useconds_t		ttdie;
 	t_omnilock		self;
 
 # ifdef philo_one

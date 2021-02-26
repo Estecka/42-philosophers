@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/24 20:00:17 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 {
-	__useconds_t		current_date;
+	useconds_t		current_date;
 
 	omnilock_lockup(&philo->self);
 	current_date = stopwatch_date();
@@ -48,10 +48,10 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 	return (TRUE);
 }
 
-extern __useconds_t	watch_over_mortals(void)
+extern useconds_t	watch_over_mortals(void)
 {
 	t_philo_medcheck	medcheck;
-	__useconds_t		next_check;
+	useconds_t		next_check;
 	unsigned int		i;
 	short				allfulfilled;
 

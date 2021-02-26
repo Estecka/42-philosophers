@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/25 14:12:57 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:40:20 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ unsigned short			g_stopwatch_running = 0;
 static pthread_t		g_thread = (pthread_t){ 0 };
 
 static struct timeval	g_origin;
-static __useconds_t		g_date[2];
+static useconds_t		g_date[2];
 static unsigned short	g_i;
 
 float					g_perfs = 1.2;
-static __useconds_t		g_prev_perfcheck = 0;
-static __useconds_t		g_next_perfcheck = 2000000;
+static useconds_t		g_prev_perfcheck = 0;
+static useconds_t		g_next_perfcheck = 2000000;
 
 static void				compute_perfs(void)
 {
 	struct timeval	current_time;
-	__useconds_t	true_time;
+	useconds_t		true_time;
 
 	gettimeofday(&current_time, NULL);
 	true_time = (current_time.tv_usec - g_origin.tv_usec)
@@ -83,10 +83,10 @@ extern void				stopwatch_stop(void)
 
 /*
 ** Gives the time in microseconds since the origin of times.
-** @return __useconds_t
+** @return useconds_t
 */
 
-extern __useconds_t		stopwatch_date(void)
+extern useconds_t		stopwatch_date(void)
 {
 	return (g_date[g_i]);
 }

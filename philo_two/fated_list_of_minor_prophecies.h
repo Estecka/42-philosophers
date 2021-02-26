@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 14:49:21 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/14 16:04:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@
 ** Threads are expected to lock the appropriate mutex before calling this functi
 ** on.
 ** @param t_philosopher* this	The philosopher to foresee.
-** @return __useconds_t	A date until which the philosopher may never starve.
+** @return useconds_t	A date until which the philosopher may never starve.
 ** 	If the philosopher has already starved, this will return a date lower than t
 ** he current date.
 */
 
-__useconds_t	philo_starve_date(t_philosopher *this);
+useconds_t	philo_starve_date(t_philosopher *this);
 
 /*
 ** A Philosopher Shall Someday Finish Their Meal.
@@ -53,6 +53,6 @@ __useconds_t	philo_starve_date(t_philosopher *this);
 ** 	This will return -1 if their is no limit to their hunger.
 */
 
-__useconds_t	philo_stuffed_date(t_philosopher *this);
+useconds_t	philo_stuffed_date(t_philosopher *this);
 
 #endif

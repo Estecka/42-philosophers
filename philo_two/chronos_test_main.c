@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:52:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/25 14:53:00 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-static __useconds_t	g_sleeptime;
+static useconds_t	g_sleeptime;
 
 static void	*thread_main(void *uid)
 {

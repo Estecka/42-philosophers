@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:29:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 14:12:37 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ extern short		isnumber(const char *arg)
 	return (TRUE);
 }
 
-extern __useconds_t	smallest(__useconds_t a, __useconds_t b)
+extern useconds_t	smallest(useconds_t a, useconds_t b)
 {
 	if (a < b)
 		return (a);
@@ -54,7 +54,7 @@ extern __useconds_t	smallest(__useconds_t a, __useconds_t b)
 		return (b);
 }
 
-extern __useconds_t	greatest(__useconds_t a, __useconds_t b)
+extern useconds_t	greatest(useconds_t a, useconds_t b)
 {
 	if (a < b)
 		return (b);

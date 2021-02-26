@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:23:29 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/15 19:06:40 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:42:54 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ struct				s_philo_medcheck
 {
 	short			isdead;
 	short			isfulfilled;
-	__useconds_t	next_check;
+	useconds_t		next_check;
 };
 
-extern __useconds_t	watch_over_mortals(void);
+useconds_t			watch_over_mortals(void);
 
 #endif
