@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/22 14:30:27 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/24 20:08:14 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ extern short		ustensile_init(int count)
 		count);
 	if (g_ustensiles == SEM_FAILED && errno == EEXIST)
 	{
-		g_ustensiles = sem_open("Instruments of Sustenance", 0);
-		if (g_ustensiles == SEM_FAILED)
-			return (FALSE);
 		if (sem_unlink("Instruments of Sustenance") < 0)
 			return (FALSE) & dprintf(STDERR_FILENO, "Fatal: A semaphore alread\
 y existed and couldn't be properly closed. %s\n", strerror(errno));

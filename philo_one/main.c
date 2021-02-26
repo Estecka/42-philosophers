@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/22 15:49:20 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 16:11:48 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static short	parseint(const char *arg, unsigned int *dst)
 ** Parses a number in milliseconds, and stores its value in microseconds.
 */
 
-static short	parseusec(const char *arg, __useconds_t *dst)
+static short	parseusec(const char *arg, useconds_t *dst)
 {
 	if (!parseint(arg, dst))
 		return (FALSE);

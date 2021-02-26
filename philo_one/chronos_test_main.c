@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:52:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/19 15:26:35 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-static __useconds_t	g_sleeptime;
+static useconds_t	g_sleeptime;
 
 static void	*thread_main(void *uid)
 {
-	__useconds_t	target_date;
-	__useconds_t	wake_date;
-	__useconds_t	max_latency;
+	__suseconds_t	target_date;
+	__suseconds_t	wake_date;
+	__suseconds_t	latency;
+	__suseconds_t	max_latency;
 
 	max_latency = 0;
 	wait_until(1000000);
@@ -31,9 +32,11 @@ static void	*thread_main(void *uid)
 	{
 		target_date = stopwatch_date() + g_sleeptime;
 		wake_date = wait_until(target_date);
-		max_latency = greatest(max_latency, wake_date - target_date);
-		printf("%2i Oversleep: %+.3f ms		Max: %.3f\n", (int)uid,
-			(wake_date - target_date) / (float)1000, max_latency / (float)1000);
+		latency = wake_date - target_date;
+		if (max_latency < latency)
+			max_latency = latency;
+		printf("%2i Oversleep: %+.3f ms		Max: %+.3f\n", (int)uid,
+			latency * USEC2MS, max_latency * USEC2MS);
 	}
 }
 

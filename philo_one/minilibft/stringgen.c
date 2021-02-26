@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chronos_wait.c                                     :+:      :+:    :+:   */
+/*   stringgen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 15:56:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:23:39 by abaur            ###   ########.fr       */
+/*   Created: 2021/02/24 15:42:14 by abaur             #+#    #+#             */
+/*   Updated: 2021/02/26 15:55:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "chronos.h"
+#include "minilibft.h"
 
-#include "minilibft/minilibft.h"
-
-extern __useconds_t		wait_until(__useconds_t target_date)
+static inline char	gethexdigit(char value)
 {
-	__useconds_t	current_date;
+	return (value < 10 ? '0' + value : 'a' + value - 10);
+}
 
-	while ((current_date = stopwatch_date()) < target_date
-		&& g_stopwatch_running)
-		usleep(smallest(250, target_date - current_date) * g_perfs);
-	return (stopwatch_date());
+extern void			miniitoahex(char dst[5], unsigned int src)
+{
+	int	i;
+
+	i = 5;
+	while (i--)
+	{
+		dst[i] = gethexdigit(src % 16);
+		src /= 16;
+	}
+	dst[5] = '\0';
 }

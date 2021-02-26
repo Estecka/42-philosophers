@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 14:48:38 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/20 17:15:47 by abaur            ###   ########.fr       */
+/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "chronos.h"
 #include "main.h"
 
-extern __useconds_t	philo_starve_date(t_philosopher *this)
+extern useconds_t	philo_starve_date(t_philosopher *this)
 {
 	if (this->status == phi_eating && this->ttaction < this->ttdie)
 		return (this->ttaction + g_ttdie);
@@ -23,9 +23,9 @@ extern __useconds_t	philo_starve_date(t_philosopher *this)
 		return (this->ttdie);
 }
 
-extern __useconds_t	philo_stuffed_date(t_philosopher *this)
+extern useconds_t	philo_stuffed_date(t_philosopher *this)
 {
-	__useconds_t	result;
+	useconds_t	result;
 
 	if (g_eatgoal < 0)
 		return (-1);
