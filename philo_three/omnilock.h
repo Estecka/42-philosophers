@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:13:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:55:02 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/02 16:00:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,40 @@ struct	s_omnilock
 
 };
 
+/*
+** Create a new mutex/semaphore.
+*/
+
 short	omnilock_init(t_omnilock *lock);
+
+/*
+** Destroys the mutex/semaphore associated with this omnilock.
+*/
+
 void	omnilock_deinit(t_omnilock *lock);
+
+/*
+** Waits onto the mutex/semaphore.
+*/
+
 void	omnilock_lockup(t_omnilock *lock);
+
+/*
+** Posts to the mutex/semaphore.
+*/
+
 void	omnilock_unlock(t_omnilock *lock);
+
+# ifndef philo_one
+
+/*
+** Destroys all the semaphores that were ever created here.
+** This will cause ominlocks to no longer work properly, so only use this before
+**  exiting the program entirely.
+*/
+
+void	ominlock_destroy_all(void);
+
+# endif
 
 #endif
