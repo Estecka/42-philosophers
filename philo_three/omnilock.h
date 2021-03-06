@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:13:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/02 16:00:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 16:07:16 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	omnilock_unlock(t_omnilock *lock);
 **  exiting the program entirely.
 */
 
-void	ominlock_destroy_all(void);
+void	omnilock_destroy_all(void);
 
 # endif
 

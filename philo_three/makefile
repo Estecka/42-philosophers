@@ -3,6 +3,9 @@ HDRS = \
 	chronos.h \
 	hermes.h \
 	omnilock.h \
+	philoprocess.h \
+	simulation_dashboard.h \
+	simulation_builder.h \
 
 SRCS = \
 	main.c \
@@ -11,6 +14,8 @@ SRCS = \
 	hermes_init.c \
 	hermes_run.c \
 	omnilock.semaphore.c \
+	simulation_builder.c \
+	simulation_start.c \
 
 LIBS = \
 	minilibft/libminift.a \

@@ -6,14 +6,13 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/02 15:34:14 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 16:02:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "minilibft/minilibft.h"
-// #include "philoproc.h"
-// #include "sim_dashboard.h"
+#include "simulation_builder.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -85,22 +84,15 @@ static short	parseargs(int argc, char **argv)
 
 extern int		main(int argc, char **argv)
 {
-	int	status;
+	t_simbuilder	sim;
 
-	dprintf(STDERR_FILENO, "%s\n", g_philo_variant);
+	debug(0, "%s\n", g_philo_variant);
 	if (!parseargs(argc, argv))
 		return (EXIT_FAILURE);
-	// if (!ustensile_init(g_philocount))
-	// 	throw(errno, "[FATAL] Couldn't initialize ustensiles.");
-	//if (!philo_init(g_philocount))
-	//	throw(errno, "[FATAL] Couldn't initialize philosophers.");
-	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
+	debug(0, "philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
-
-	status = EXIT_SUCCESS;
-	//...
-
-	//philo_deinit();
-	//ustensile_deinit();
-	return (status);
+	sim_init(&sim);
+	sim_start(&sim);
+	throw(-1, "[FATAL] Main unexpectedly returned");
+	return (EXIT_FAILURE);
 }
