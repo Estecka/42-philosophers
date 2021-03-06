@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:29:51 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/02 15:34:59 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 19:52:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "minilibft/minilibft.h"
 
-extern void		hermsender_send(t_hermsender *this, unsigned int amount)
+extern void		hermes_send(t_hermsender *this, unsigned int amount)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -36,7 +36,7 @@ extern void		hermsender_send(t_hermsender *this, unsigned int amount)
 		
 }
 
-extern unsigned int	hermreceiver_fetch(t_hermreceiver *this)
+extern unsigned int	hermes_receive(t_hermreceiver *this)
 {
 	unsigned int	r;
 

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:24:51 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 16:02:59 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 21:46:31 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ extern short		omnilock_init(t_omnilock *lock)
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP,
 		1);
 	if (lock->semaphore == SEM_FAILED)
-		throw(errno, "[FATAL] Failed to initialize semaphore %4.4s",
+		throw(errno, "[FATAL] Failed to initialize semaphore %8.8s",
 			lock->sem_uid);
 	return (lock->semaphore != SEM_FAILED);
 }
@@ -44,7 +44,7 @@ extern void			omnilock_deinit(t_omnilock *lock)
 
 extern void			omnilock_destroy_all(void)
 {
-	char	uid[5];
+	char	uid[9];
 	sem_t	*sem;
 
 	while (g_semcount)

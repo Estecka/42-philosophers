@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 15:13:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 16:07:16 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 20:59:14 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ struct	s_omnilock
 
 # else
 
-	char			sem_uid[5];
+	char			sem_uid[9];
 	sem_t			*semaphore;
 
 # endif

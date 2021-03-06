@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 17:22:36 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 17:08:16 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 21:11:11 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static t_hermsender		*new_hermsender(unsigned int dups)
 	this->locks = ((void*)this) + (sizeof(t_hermsender));
 	i = -1;
 	while (++i < dups)
+	{
 		omnilock_init(&this->locks[i]);
+		sem_wait(this->locks[i].semaphore);
+	}
 	return (this);
 }
 

@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philoprocess.h                                     :+:      :+:    :+:   */
+/*   demeter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 19:20:22 by abaur            ###   ########.fr       */
+/*   Created: 2021/03/06 19:33:55 by abaur             #+#    #+#             */
+/*   Updated: 2021/03/06 20:00:34 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOPROCESS_H
-# define PHILOPROCESS_H
+#include "demeter.h"
 
-#include "hermes.h"
+#include "chronos.h"
+#include "main.h"
+#include "minilibft/minilibft.h"
 
-/*
-** @var unsignedint uid	The unique id of the philsopher.
-**
-** @var t_hermreceiver sim_abort	Listens for the eventual abortion of the sim
-** ulation.
-*/
+#include <stdlib.h>
 
-typedef struct s_philoproc	t_philoproc;
-struct	s_philoproc
+extern int	demeter_main(t_simdash *this)
 {
-	unsigned int	uid;
-
-	t_hermreceiver	*sim_abort;
-};
-
-int		philoproc_main(t_philoproc *this);
-
-#endif
+	wait_until(g_ttdie);
+	hermes_send(this->sim_abort, 1);
+	stopwatch_stop();
+	debug(0, "%5u Simulation stopped", stopwatch_date() / MS2USEC);
+	return (EXIT_SUCCESS);
+}

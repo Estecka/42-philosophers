@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:06:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/02 15:37:59 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/06 19:52:22 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ void			hermreceiver_stop(t_hermreceiver *this);
 ** .
 */
 
-void			hermsender_send(t_hermsender *this, unsigned int amount);
+void			hermes_send(t_hermsender *this, unsigned int amount);
 
-unsigned int	hermreceiver_fetch(t_hermreceiver *this);
+unsigned int	hermes_receive(t_hermreceiver *this);
 
 #endif

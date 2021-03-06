@@ -1,6 +1,7 @@
 HDRS = \
 	main.h \
 	chronos.h \
+	demeter.h \
 	hermes.h \
 	omnilock.h \
 	philoprocess.h \
@@ -10,10 +11,12 @@ HDRS = \
 SRCS = \
 	main.c \
 	chronos.sleep.c \
+	demeter.c \
 	hermes_getset.c \
 	hermes_init.c \
 	hermes_run.c \
 	omnilock.semaphore.c \
+	philoprocess.c \
 	simulation_builder.c \
 	simulation_start.c \
 
