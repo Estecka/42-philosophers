@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:09:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/04 18:28:43 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 17:16:42 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ struct			s_simbuilder
 	t_philoproc	*philos;
 
 	t_hermpipe	sim_abort;
+	t_hermpipe	fulfillment;
 };
 
 short			sim_init(t_simbuilder *this);

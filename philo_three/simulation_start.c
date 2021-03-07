@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 18:19:52 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 19:50:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@ extern noreturn void	mutate_demeter(t_simbuilder *this)
 {
 	int	status;
 
+	hermreceiver_start(&this->dashboard.fulfillment);
 	status = demeter_main(&this->dashboard);
+	hermreceiver_stop(&this->dashboard.fulfillment);
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
-		debug(0, "[INFO] Pid %i waiting...", this->dashboard.processes[i]);
+		debug(0, "[INFO] %i Pid %i waiting...\n", i, this->dashboard.processes[i]);
 		waitpid(this->dashboard.processes[i], NULL, 0);
-		debug(0, "[INFO] Pid %i returned !", this->dashboard.processes[i]);
+		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i]);
 	}
 	sim_destroy(this);
 	omnilock_destroy_all();

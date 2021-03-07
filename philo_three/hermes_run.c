@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:00:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/02 15:39:24 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 19:49:01 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		*hermreceiver_main(t_hermreceiver *this)
 	{
 		status = sem_wait(this->semaphore);
 		if (status)
-			debug(errno, "[ERR] Failed to listen to a semaphore.");
+			debug(errno, "[ERR] Failed to listen to a semaphore.\n");
 		if (!status && this->autostop)
 		{
 			this->value++;
