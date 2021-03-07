@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 20:46:49 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:19:26 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ extern int	philoproc_main(t_philoproc *this)
 	date = stopwatch_date();
 	debug(0, "%5u %i I think, therefore, I am", date/MS2USEC, this->uid);
 	date = wait_until(date + g_ttsleep);
-	while (!this->sim_abort->value)
+	while (!this->sim_abort.value)
 	{
 		printf("%5u %i is eating\n", date / MS2USEC, this->uid);
 		date = wait_until(date + g_tteat);

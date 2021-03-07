@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:06:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 19:52:22 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:14:09 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 # include <semaphore.h>
 
 /*
-** @var unsigned int duplicatas	The amount of semaphores the messages will be se
-** nt to.
-** @var t_omnilocks[] locks	The semaphores used for sending the message.
+** @var unsigned int duplicatas	The amount of receiver for this sender. All even
+** ts sent through there will be duplicated accordingly.
+** @var t_omnilocks locks	The semaphore used to send the event.
 */
 
 typedef struct s_hermsender		t_hermsender;
 struct			s_hermsender
 {
 	unsigned int	duplicatas;
-	t_omnilock		*locks;
+	t_omnilock		locks;
 };
 
 /*
@@ -56,38 +56,37 @@ struct			s_hermreceiver
 
 /*
 ** @var unsigned int duplicatas	The amount of receivers for this pipe.
-** @var t_hermsender*	The sender for this pipe.
-** @var t_hermreceiver*[] receivers	The receivers for this pipe.
-** 	This pointer array must be freed, along with all the receivers it contains.
+** @var t_hermsender	The sender for this pipe.
+** @var t_hermreceiver receiver	The receiver for this pipe.
 */
 
 typedef struct s_hermpipe		t_hermpipe;
 struct			s_hermpipe
 {
 	unsigned int	duplicatas;
-	t_hermsender	*sender;
-	t_hermreceiver	**receivers;
+	t_hermsender	sender;
+	t_hermreceiver	receivers;
 };
 
 /*
 ** Initializes a set of sender and receivers.
-** @param t_hermpipe* this	The hermpipe to store the allocated objects.
+** @param t_hermpipe* this	The hermpipe to store the sender and receiver.
 ** @param unsigned int dups	The amount of receivers for this pipe.
 ** @param unsigned int max	The maximum amount of events that should be sent thr
 ** ough the pipe.
 */
 
-short			new_hermes(t_hermpipe *this, unsigned int dups,
+void			hermes_init(t_hermpipe *this, unsigned int dups,
 unsigned int max);
 
 /*
-** Destroys all semaphores for this sender, and deallocates the sender.
+** Destroys the semaphore for this sender.
 */
 
 void			hermsender_destroy(t_hermsender *this);
 
 /*
-** Stops the receiver thread and deallocates the receiver.
+** Stops the receiver thread.
 ** The semaphore is left untouched; it is considered the sender's duty to destro
 ** y the semaphores.
 */

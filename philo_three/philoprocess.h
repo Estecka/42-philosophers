@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 19:20:22 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:06:39 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ struct	s_philoproc
 {
 	unsigned int	uid;
 
-	t_hermreceiver	*sim_abort;
+	t_hermreceiver	sim_abort;
 };
 
 int		philoproc_main(t_philoproc *this);

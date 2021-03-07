@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:33:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 20:00:34 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:16:27 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 extern int	demeter_main(t_simdash *this)
 {
 	wait_until(g_ttdie);
-	hermes_send(this->sim_abort, 1);
+	hermes_send(&this->sim_abort, 1);
 	stopwatch_stop();
 	debug(0, "%5u Simulation stopped", stopwatch_date() / MS2USEC);
 	return (EXIT_SUCCESS);

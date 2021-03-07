@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 17:09:26 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:16:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,22 @@ extern short			sim_init(t_simbuilder *this)
 	this->dashboard.processes = malloc(sizeof(pid_t*) * g_philocount);
 	if (!this->philos || !this->dashboard.processes)
 		throw(errno, "[FATAL] Malloc failed in `sim_init`.");
-	new_hermes(&this->sim_abort, g_philocount, 1);
+	hermes_init(&this->sim_abort, g_philocount, 1);
 	this->dashboard.sim_abort = this->sim_abort.sender;
-	this->sim_abort.sender = NULL;
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
 		this->philos[i].uid = i;
-		this->philos[i].sim_abort = this->sim_abort.receivers[i];
-		this->sim_abort.receivers[i] = NULL;
+		this->philos[i].sim_abort = this->sim_abort.receivers;
 	}
-	free(this->sim_abort.receivers);
 	return (TRUE);
 }
 
 extern void			sim_destroy(t_simbuilder *this)
 {
-	hermsender_destroy(this->dashboard.sim_abort);
+	hermsender_destroy(&this->dashboard.sim_abort);
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
-		hermreceiver_destroy(this->philos[i].sim_abort);
+		hermreceiver_destroy(&this->philos[i].sim_abort);
 	}
 	free(this->philos);
 	free(this->dashboard.processes);

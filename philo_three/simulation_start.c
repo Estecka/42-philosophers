@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 19:53:56 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/07 18:19:52 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 {
 	int	status;
 
-	hermreceiver_start(philosopher->sim_abort);
+	hermreceiver_start(&philosopher->sim_abort);
 	status = philoproc_main(philosopher);
-	hermreceiver_stop(philosopher->sim_abort);
+	hermreceiver_stop(&philosopher->sim_abort);
 	sim_destroy(this);
 	exit(status);
 }
@@ -60,7 +60,7 @@ extern noreturn void	sim_start(t_simbuilder *this)
 		pid = fork();
 		if (pid < 0)
 		{
-			hermes_send(this->sim_abort.sender, 1);
+			hermes_send(&this->sim_abort.sender, 1);
 			throw(errno, "[FATAL] Failed fo fork philo n°%i", i);
 		}
 		if (!pid)
