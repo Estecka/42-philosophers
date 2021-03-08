@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:06:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 18:14:09 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:51:03 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,12 @@
 # include <semaphore.h>
 
 /*
-** @var unsigned int duplicatas	The amount of receiver for this sender. All even
-** ts sent through there will be duplicated accordingly.
 ** @var t_omnilocks locks	The semaphore used to send the event.
 */
 
 typedef struct s_hermsender		t_hermsender;
 struct			s_hermsender
 {
-	unsigned int	duplicatas;
 	t_omnilock		locks;
 };
 
@@ -43,15 +40,20 @@ struct			s_hermsender
 ** @var sem_t* semaphore	The semaphore being listened to.
 ** @var unsigned int		The amount of unacknowlegded events received through
 **  this semaphore.
+** @var void*(*)(void*) reaction	A function to execute whenever an event is r
+** eceived.
+** @var void* reaction_arg	An argument to be passed to the reaction function.
 */
 
 typedef struct s_hermreceiver	t_hermreceiver;
 struct			s_hermreceiver
 {
-	unsigned int	autostop;
-	pthread_t		thread;
-	sem_t			*semaphore;
-	unsigned int	value;
+	unsigned int		autostop;
+	pthread_t			thread;
+	sem_t				*semaphore;
+	unsigned int		value;
+	void				*(*reaction)(t_hermreceiver*, void*);
+	void				*reaction_arg;
 };
 
 /*
@@ -63,7 +65,6 @@ struct			s_hermreceiver
 typedef struct s_hermpipe		t_hermpipe;
 struct			s_hermpipe
 {
-	unsigned int	duplicatas;
 	t_hermsender	sender;
 	t_hermreceiver	receivers;
 };
@@ -76,8 +77,7 @@ struct			s_hermpipe
 ** ough the pipe.
 */
 
-void			hermes_init(t_hermpipe *this, unsigned int dups,
-unsigned int max);
+void			hermes_init(t_hermpipe *this, unsigned int max);
 
 /*
 ** Destroys the semaphore for this sender.

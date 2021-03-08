@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:33:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 20:54:19 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:52:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ extern int	demeter_main(t_simdash *this)
 			break ;
 		}
 	}
-	hermes_send(&this->sim_abort, 1);
+	hermes_send(&this->sim_abort, g_philocount);
 	stopwatch_stop();
 	debug(0, "%5u Simulation stopped\n", stopwatch_date() / MS2USEC);
 	return (EXIT_SUCCESS);

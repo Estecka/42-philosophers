@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:00:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 19:49:01 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:42:33 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void		*hermreceiver_main(t_hermreceiver *this)
 		{
 			this->value++;
 			this->autostop--;
+			if (this->reaction)
+				this->reaction(this, this->reaction_arg);
 		}
 	}
 	return (NULL);

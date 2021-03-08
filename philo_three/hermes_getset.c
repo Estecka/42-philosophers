@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:29:51 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 19:48:55 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:50:08 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 
 extern void		hermes_send(t_hermsender *this, unsigned int amount)
 {
-	unsigned int	i;
-
-	i = -1;
-	amount *= this->duplicatas;
-	while (++i < amount)
+	while (amount--)
 	{
 		if (sem_post(this->locks.semaphore))
 		{
@@ -29,7 +25,6 @@ extern void		hermes_send(t_hermsender *this, unsigned int amount)
 			break ;
 		}
 	}
-		
 }
 
 extern unsigned int	hermes_receive(t_hermreceiver *this)

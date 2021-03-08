@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 18:53:54 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:51:28 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ extern short			sim_init(t_simbuilder *this)
 	this->dashboard.processes = malloc(sizeof(pid_t*) * g_philocount);
 	if (!this->philos || !this->dashboard.processes)
 		throw(errno, "[FATAL] Malloc failed in `sim_init`.");
-	hermes_init(&this->sim_abort, g_philocount, 1);
-	hermes_init(&this->fulfillment, 1, g_philocount);
+	hermes_init(&this->sim_abort, 1);
+	hermes_init(&this->fulfillment, g_philocount);
 	this->dashboard.sim_abort = this->sim_abort.sender;
 	this->dashboard.fulfillment = this->fulfillment.receivers;
 	for (unsigned int i=0; i<g_philocount; i++)

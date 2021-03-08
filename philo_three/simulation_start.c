@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 19:50:53 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 17:52:43 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ extern noreturn void	sim_start(t_simbuilder *this)
 		pid = fork();
 		if (pid < 0)
 		{
-			hermes_send(&this->sim_abort.sender, 1);
+			hermes_send(&this->sim_abort.sender, g_philocount);
 			throw(errno, "[FATAL] Failed fo fork philo n°%i", i);
 		}
 		if (!pid)
