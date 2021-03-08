@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 15:06:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 17:51:03 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 18:42:43 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ struct			s_hermsender
 ** @var sem_t* semaphore	The semaphore being listened to.
 ** @var unsigned int		The amount of unacknowlegded events received through
 **  this semaphore.
-** @var void*(*)(void*) reaction	A function to execute whenever an event is r
+** @var void(*)(void*) reaction	A function to execute whenever an event is r
 ** eceived.
 ** @var void* reaction_arg	An argument to be passed to the reaction function.
 */
@@ -52,7 +52,7 @@ struct			s_hermreceiver
 	pthread_t			thread;
 	sem_t				*semaphore;
 	unsigned int		value;
-	void				*(*reaction)(t_hermreceiver*, void*);
+	void				(*reaction)(t_hermreceiver*, void*);
 	void				*reaction_arg;
 };
 

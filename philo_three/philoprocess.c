@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 20:02:04 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 16:10:07 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "main.h"
 #include "chronos.h"
+#include "logos.h"
 #include "minilibft/minilibft.h"
 
 #include <stdio.h>
@@ -27,8 +28,7 @@ static void	philoproc_eat(t_philoproc *this)
 	date = wait_until(this->ttaction);
 	// this->ttdie += g_ttdie;
 	this->status = phi_sleeping;
-	printf("%5lu %i is sleeping	(%+.3fms)\n",
-		date / MS2USEC, this->uid, (date - this->ttaction) * USEC2MS);
+	philo_log(this->ttaction, date, this->uid, "is sleeping");
 	// drop_ustensile(this);
 	this->meals++;
 	if ((signed)this->meals == g_eatgoal)
@@ -45,8 +45,7 @@ static void	philoproc_sleep(t_philoproc *this)
 	this->ttaction += g_ttsleep;
 	date = wait_until(this->ttaction);
 	this->status = phi_eating;
-	printf("%5lu %i is eating	(%+.3fms)\n",
-		date / MS2USEC, this->uid, (date - this->ttaction) * USEC2MS);
+	philo_log(this->ttaction, date, this->uid, "is eating");
 }
 
 extern int	philoproc_main(t_philoproc *this)

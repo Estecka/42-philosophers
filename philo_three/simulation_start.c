@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 17:52:43 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/08 18:55:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "chronos.h"
 #include "demeter.h"
+#include "logos.h"
 #include "main.h"
 #include "minilibft/minilibft.h"
 #include "omnilock.h"
@@ -36,18 +37,32 @@ extern noreturn void	mutate_demeter(t_simbuilder *this)
 		waitpid(this->dashboard.processes[i], NULL, 0);
 		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i]);
 	}
+	logos_deinit();
 	sim_destroy(this);
 	omnilock_destroy_all();
 	exit(status);
+}
+
+static void				philo_silence(t_hermreceiver *hermes, void *philo)
+{
+	(void)hermes;
+	logos_silence();
+	debug(0, "%5u %i was Silenced\n",
+		stopwatch_date() / MS2USEC, ((t_philoproc*)philo)->uid);
+	((t_philoproc*)philo)->status = phi_dead;
+	stopwatch_stop();
 }
 
 extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 {
 	int	status;
 
+	philosopher->sim_abort.reaction = &philo_silence;
+	philosopher->sim_abort.reaction_arg = philosopher;
 	hermreceiver_start(&philosopher->sim_abort);
 	status = philoproc_main(philosopher);
 	hermreceiver_stop(&philosopher->sim_abort);
+	logos_deinit();
 	sim_destroy(this);
 	exit(status);
 }
@@ -57,6 +72,7 @@ extern noreturn void	sim_start(t_simbuilder *this)
 	pid_t	pid;
 
 	stopwatch_start();
+	logos_init();
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
 		pid = fork();
