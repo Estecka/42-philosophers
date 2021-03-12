@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 18:32:38 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/12 17:09:36 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ enum	e_phistatus
 ** @var useconds_t ttaction	The date when the ongoing action will be completed.
 ** @var unsigned int meals	The amount of times the philosopher has finished a m
 ** eal.
-**
+** @var unsigned int hands	The amount of eating ustensiles this philosopher has
+**  grabbed.
 ** @var t_hermreceiver sim_abort	Listens for the eventual abortion of the sim
 ** ulation.
 ** @var t_hermsender isfulfilled	Event to send once the philosopher is fulfil
@@ -46,6 +47,7 @@ struct	s_philoproc
 	t_phistatus		status;
 	useconds_t		ttaction;
 	unsigned int	meals;
+	unsigned int	hands;
 
 	t_hermreceiver	sim_abort;
 	t_hermsender	isfulfilled;

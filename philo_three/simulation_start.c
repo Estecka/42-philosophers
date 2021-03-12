@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 18:55:53 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/12 17:37:04 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "main.h"
 #include "minilibft/minilibft.h"
 #include "omnilock.h"
+#include "sustenance_ustensile.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,6 +38,8 @@ extern noreturn void	mutate_demeter(t_simbuilder *this)
 		waitpid(this->dashboard.processes[i], NULL, 0);
 		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i]);
 	}
+	ustensile_deinit();
+	// sem_unlink("Instruments of Sustenance");
 	logos_deinit();
 	sim_destroy(this);
 	omnilock_destroy_all();
@@ -64,6 +67,7 @@ extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 	hermreceiver_stop(&philosopher->sim_abort);
 	logos_deinit();
 	sim_destroy(this);
+	ustensile_deinit();
 	exit(status);
 }
 
@@ -71,8 +75,9 @@ extern noreturn void	sim_start(t_simbuilder *this)
 {
 	pid_t	pid;
 
-	stopwatch_start();
+	ustensile_init(g_philocount);
 	logos_init();
+	stopwatch_start();
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
 		pid = fork();

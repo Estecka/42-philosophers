@@ -6,8 +6,10 @@ HDRS = \
 	logos.h \
 	omnilock.h \
 	philoprocess.h \
+	philoproc_ustensile.h \
 	simulation_dashboard.h \
 	simulation_builder.h \
+	sustenance_ustensile.h \
 
 SRCS = \
 	main.c \
@@ -19,8 +21,10 @@ SRCS = \
 	logos.c \
 	omnilock.semaphore.c \
 	philoprocess.c \
+	philoproc_ustensile.c \
 	simulation_builder.c \
 	simulation_start.c \
+	sustenance_ustensile.c \
 
 LIBS = \
 	minilibft/libminift.a \
