@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:09:52 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/07 17:16:42 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 15:16:35 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct			s_simbuilder
 
 	t_hermpipe	sim_abort;
 	t_hermpipe	fulfillment;
+	t_hermpipe	deathes;
 };
 
 short			sim_init(t_simbuilder *this);

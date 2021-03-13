@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/12 17:09:36 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 15:07:17 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ enum	e_phistatus
 ** eal.
 ** @var unsigned int hands	The amount of eating ustensiles this philosopher has
 **  grabbed.
+**
 ** @var t_hermreceiver sim_abort	Listens for the eventual abortion of the sim
 ** ulation.
 ** @var t_hermsender isfulfilled	Event to send once the philosopher is fulfil
 ** led.
+** @var t_hermsender isdead	Event to send once the philosopher has starved.
 */
 
 typedef struct s_philoproc	t_philoproc;
@@ -51,6 +53,7 @@ struct	s_philoproc
 
 	t_hermreceiver	sim_abort;
 	t_hermsender	isfulfilled;
+	t_hermsender	isdead;
 };
 
 int		philoproc_main(t_philoproc *this);

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 17:51:28 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 15:54:29 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ static void				sim_init_philo(t_simbuilder *this, unsigned int i)
 	this->philos[i].meals = 0;
 	this->philos[i].sim_abort = this->sim_abort.receivers;
 	this->philos[i].isfulfilled = this->fulfillment.sender;
+	hermes_init(&this->deathes, 1);
+	this->philos[i].isdead = this->deathes.sender;
+	this->dashboard.deathes[i] = this->deathes.receivers;
 }
 
 extern short			sim_init(t_simbuilder *this)
 {
 	this->philos = malloc(sizeof(t_philoproc) * g_philocount);
 	this->dashboard.processes = malloc(sizeof(pid_t*) * g_philocount);
-	if (!this->philos || !this->dashboard.processes)
+	this->dashboard.deathes = malloc(sizeof(t_hermreceiver) * g_philocount);
+	if (!this->philos || !this->dashboard.processes || !this->dashboard.deathes)
 		throw(errno, "[FATAL] Malloc failed in `sim_init`.");
 	hermes_init(&this->sim_abort, 1);
 	hermes_init(&this->fulfillment, g_philocount);
@@ -50,8 +54,11 @@ extern void			sim_destroy(t_simbuilder *this)
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
 		hermreceiver_destroy(&this->philos[i].sim_abort);
+		hermreceiver_destroy(&this->dashboard.deathes[i]);
+		hermsender_destroy(&this->philos[i].isdead);
 		hermsender_destroy(&this->philos[i].isfulfilled);
 	}
 	free(this->philos);
 	free(this->dashboard.processes);
+	free(this->dashboard.deathes);
 }
