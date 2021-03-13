@@ -6,17 +6,17 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 16:58:18 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:20:13 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOPROCESS_H
 # define PHILOPROCESS_H
 
-#include "hermes.h"
+# include "hermes.h"
 
-#include <pthread.h>
-#include <unistd.h>
+# include <pthread.h>
+# include <unistd.h>
 
 typedef enum e_phistatus	t_phistatus;
 enum	e_phistatus

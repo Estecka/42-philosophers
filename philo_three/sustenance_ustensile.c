@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/12 17:16:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 20:00:01 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ roperly closed.\n");
 			count);
 	}
 	if (g_ustensiles == SEM_FAILED)
+	{
 		throw(errno, "[FATAL] Ustensile_init failed.\n");
+		return (FALSE);
+	}
 	else
 		return (TRUE);
 }

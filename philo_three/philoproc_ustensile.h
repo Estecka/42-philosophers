@@ -6,12 +6,12 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:41:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/12 17:08:17 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:23:22 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_USTENSILE_H
-# define PHILOSOPHER_USTENSILE_H
+#ifndef PHILOPROC_USTENSILE_H
+# define PHILOPROC_USTENSILE_H
 
 # include "philoprocess.h"
 

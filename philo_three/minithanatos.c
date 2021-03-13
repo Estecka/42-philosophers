@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:59:15 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 17:30:57 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:19:29 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	*minithanatos_main(t_philoproc *philo)
 		date = stopwatch_date();
 		if (date > philo->ttdie)
 		{
-			
 			hermes_send(&philo->isdead, 1);
 			philo->status = phi_dead;
 			break ;
@@ -44,8 +43,8 @@ extern void	minithanatos_start(t_philoproc *this)
 {
 	int	err;
 
-	err = pthread_create(&this->minithan, NULL, 
-	(void*(*)(void*))&minithanatos_main, this);
+	err = pthread_create(&this->minithan, NULL,
+		(void*(*)(void*))&minithanatos_main, this);
 	if (err)
 		throw(err, "[FATAL] Failed to start minithanatos n°%i\n", this->uid);
 }

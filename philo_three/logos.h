@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:33:48 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 18:39:01 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:18:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 # include <semaphore.h>
 # include <unistd.h>
 
-void	logos_init();
-void	logos_deinit();
+void	logos_init(void);
+void	logos_deinit(void);
 
 /*
 ** Silences the logger, without deinitializing it.
 */
 
-void	logos_silence();
+void	logos_silence(void);
 
 /*
 ** @param suseconds_t ttaction	The date when the philosopher was expected to ta

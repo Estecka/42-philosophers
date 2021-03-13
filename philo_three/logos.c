@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:42:33 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 18:40:57 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:18:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 static t_omnilock	g_lock;
 static short		g_issilenced;
 
-extern void	logos_init()
+extern void	logos_init(void)
 {
 	omnilock_init(&g_lock);
 	g_issilenced = FALSE;
 }
 
-extern void	logos_deinit()
+extern void	logos_deinit(void)
 {
 	omnilock_deinit(&g_lock);
 }
 
-extern void	logos_silence()
+extern void	logos_silence(void)
 {
 	omnilock_lockup(&g_lock);
 	g_issilenced = TRUE;

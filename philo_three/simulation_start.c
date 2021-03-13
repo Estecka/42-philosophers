@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 17:22:07 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 19:58:00 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,34 @@
 
 extern noreturn void	mutate_demeter(t_simbuilder *this)
 {
-	int	status;
+	int				status;
+	unsigned int	i;
 
-	for (unsigned int i=0; i<g_philocount; i++)
+	i = -1;
+	while (++i < g_philocount)
 		hermreceiver_start(&this->dashboard.deathes[i]);
 	hermreceiver_start(&this->dashboard.fulfillment);
 	status = demeter_main(&this->dashboard);
 	hermreceiver_stop(&this->dashboard.fulfillment);
-	for (unsigned int i=0; i<g_philocount; i++)
+	i = -1;
+	while (++i < g_philocount)
 	{
 		hermreceiver_stop(&this->dashboard.deathes[i]);
-		debug(0, "[INFO] %i Pid %i waiting...\n", i, this->dashboard.processes[i]);
+		debug(0, "[INFO] %i Pid %i waiting...\n", i, this->dashboard.processes[i
+]);
 		waitpid(this->dashboard.processes[i], NULL, 0);
-		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i]);
+		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i
+]);
 	}
 	ustensile_deinit();
-	// sem_unlink("Instruments of Sustenance");
+	sem_unlink("Instruments of Sustenance");
 	logos_deinit();
 	sim_destroy(this);
 	omnilock_destroy_all();
 	exit(status);
 }
 
-static void				philo_silence(t_hermreceiver *hermes, void *philo)
+static void	philo_silence(t_hermreceiver *hermes, void *philo)
 {
 	(void)hermes;
 	logos_silence();
@@ -79,12 +84,14 @@ extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 
 extern noreturn void	sim_start(t_simbuilder *this)
 {
-	pid_t	pid;
+	pid_t			pid;
+	unsigned int	i;
 
 	ustensile_init(g_philocount);
 	logos_init();
 	stopwatch_start();
-	for (unsigned int i=0; i<g_philocount; i++)
+	i = -1;
+	while (++i < g_philocount)
 	{
 		pid = fork();
 		if (pid < 0)

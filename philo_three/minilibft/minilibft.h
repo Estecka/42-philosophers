@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:22:19 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/01 18:41:58 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 19:58:18 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ float			min(float a, float b);
 float			max(float a, float b);
 float			clamp(float v, float min, float max);
 
-noreturn void	throw(int status, const char *format, ...
+noreturn void			throw(int status, const char *format, ...
 ) __attribute__((format(printf,2,3)));
 void			debug(int status, const char *format, ...
 ) __attribute__((format(printf,2,3)));

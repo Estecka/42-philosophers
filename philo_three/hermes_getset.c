@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:29:51 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 17:50:08 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:17:38 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "minilibft/minilibft.h"
 
-extern void		hermes_send(t_hermsender *this, unsigned int amount)
+extern void			hermes_send(t_hermsender *this, unsigned int amount)
 {
 	while (amount--)
 	{
@@ -34,7 +34,7 @@ extern unsigned int	hermes_receive(t_hermreceiver *this)
 	if (this->value)
 	{
 		r = this->value;
-		this->value -=  r;
+		this->value -= r;
 		return (r);
 	}
 	return (0);

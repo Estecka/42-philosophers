@@ -6,14 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:58:07 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 16:11:24 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:19:49 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITHANATOS_H
 # define MINITHANATOS_H
 
-#include "philoprocess.h"
+# include "philoprocess.h"
 
 void	minithanatos_start(t_philoproc *this);
 void	minithanatos_stop(t_philoproc *this);

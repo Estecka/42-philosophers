@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:00:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/08 17:42:33 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:18:24 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		*hermreceiver_main(t_hermreceiver *this)
 {
 	int	status;
 
-	while(this->autostop)
+	while (this->autostop)
 	{
 		status = sem_wait(this->semaphore);
 		if (status)

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 16:03:20 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 19:12:06 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-static void				sim_init_philo(t_simbuilder *this, unsigned int i)
+static void		sim_init_philo(t_simbuilder *this, unsigned int i)
 {
 	this->philos[i] = (t_philoproc){0};
 	this->philos[i].uid = i;
@@ -33,8 +33,10 @@ static void				sim_init_philo(t_simbuilder *this, unsigned int i)
 	this->dashboard.deathes[i] = this->deathes.receivers;
 }
 
-extern short			sim_init(t_simbuilder *this)
+extern short	sim_init(t_simbuilder *this)
 {
+	unsigned int	i;
+
 	this->philos = malloc(sizeof(t_philoproc) * g_philocount);
 	this->dashboard.processes = malloc(sizeof(pid_t*) * g_philocount);
 	this->dashboard.deathes = malloc(sizeof(t_hermreceiver) * g_philocount);
@@ -44,15 +46,19 @@ extern short			sim_init(t_simbuilder *this)
 	hermes_init(&this->fulfillment, g_philocount);
 	this->dashboard.sim_abort = this->sim_abort.sender;
 	this->dashboard.fulfillment = this->fulfillment.receivers;
-	for (unsigned int i=0; i<g_philocount; i++)
+	i = -1;
+	while (++i < g_philocount)
 		sim_init_philo(this, i);
 	return (TRUE);
 }
 
-extern void			sim_destroy(t_simbuilder *this)
+extern void		sim_destroy(t_simbuilder *this)
 {
+	unsigned int	i;
+
 	hermsender_destroy(&this->dashboard.sim_abort);
-	for (unsigned int i=0; i<g_philocount; i++)
+	i = -1;
+	while (++i < g_philocount)
 	{
 		hermreceiver_destroy(&this->philos[i].sim_abort);
 		hermreceiver_destroy(&this->dashboard.deathes[i]);
