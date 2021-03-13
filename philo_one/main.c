@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 16:11:48 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:09:27 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ static short	parseargs(int argc, char **argv)
 		write(STDERR_FILENO, "Not enough philosophers.\n", 26);
 		return (FALSE);
 	}
+	if (g_philocount > 200)
+	{
+		write(STDERR_FILENO, "Too many philosophers\n", 23);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
@@ -91,6 +96,10 @@ extern int		main(int argc, char **argv)
 	dprintf(STDERR_FILENO, "%s\n", g_philo_variant);
 	if (!parseargs(argc, argv))
 		return (EXIT_FAILURE);
+	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
+		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
+	if (g_eatgoal == 0)
+		return (EXIT_SUCCESS);
 	if (!ustensile_init(g_philocount))
 	{
 		dprintf(STDERR_FILENO, "Ustensiles init error: %s\n", strerror(errno));
@@ -102,8 +111,6 @@ extern int		main(int argc, char **argv)
 		ustensile_deinit();
 		return (EXIT_FAILURE);
 	}
-	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
-		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
 	status = simulation_main();
 	philo_deinit();
 	ustensile_deinit();

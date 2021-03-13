@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/06 16:02:25 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 18:02:58 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ static short	parseargs(int argc, char **argv)
 		write(STDERR_FILENO, "Not enough philosophers.\n", 26);
 		return (FALSE);
 	}
+	if (g_philocount > 200)
+	{
+		write(STDERR_FILENO, "Too many philosophers\n", 23);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
@@ -91,6 +96,8 @@ extern int		main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	debug(0, "philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
+	if (g_eatgoal == 0)
+		return (EXIT_SUCCESS);
 	sim_init(&sim);
 	sim_start(&sim);
 	throw(-1, "[FATAL] Main unexpectedly returned");
