@@ -4,6 +4,7 @@ HDRS = \
 	demeter.h \
 	hermes.h \
 	logos.h \
+	minithanatos.h \
 	omnilock.h \
 	philoprocess.h \
 	philoproc_ustensile.h \
@@ -19,6 +20,7 @@ SRCS = \
 	hermes_init.c \
 	hermes_run.c \
 	logos.c \
+	minithanatos.c \
 	omnilock.semaphore.c \
 	philoprocess.c \
 	philoproc_ustensile.c \

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 15:54:29 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 16:03:20 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void				sim_init_philo(t_simbuilder *this, unsigned int i)
 	this->philos[i] = (t_philoproc){0};
 	this->philos[i].uid = i;
 	this->philos[i].status = phi_sleeping;
+	this->philos[i].ttdie = g_ttdie;
 	this->philos[i].ttaction = 0;
 	this->philos[i].meals = 0;
 	this->philos[i].sim_abort = this->sim_abort.receivers;

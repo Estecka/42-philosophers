@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/12 17:55:59 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 17:30:00 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	philoproc_eat(t_philoproc *this)
 	suseconds_t	date;
 
 	date = wait_until(this->ttaction);
-	// this->ttdie += g_ttdie;
+	this->ttdie += g_ttdie;
 	philo_log(this->ttaction, date, this->uid, "is sleeping");
 	philo_drop_ustensiles(this);
 	this->meals++;

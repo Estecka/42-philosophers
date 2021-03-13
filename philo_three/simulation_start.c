@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/12 18:14:51 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 17:22:07 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "demeter.h"
 #include "logos.h"
 #include "main.h"
+#include "minithanatos.h"
 #include "minilibft/minilibft.h"
 #include "omnilock.h"
 #include "sustenance_ustensile.h"
@@ -29,11 +30,14 @@ extern noreturn void	mutate_demeter(t_simbuilder *this)
 {
 	int	status;
 
+	for (unsigned int i=0; i<g_philocount; i++)
+		hermreceiver_start(&this->dashboard.deathes[i]);
 	hermreceiver_start(&this->dashboard.fulfillment);
 	status = demeter_main(&this->dashboard);
 	hermreceiver_stop(&this->dashboard.fulfillment);
 	for (unsigned int i=0; i<g_philocount; i++)
 	{
+		hermreceiver_stop(&this->dashboard.deathes[i]);
 		debug(0, "[INFO] %i Pid %i waiting...\n", i, this->dashboard.processes[i]);
 		waitpid(this->dashboard.processes[i], NULL, 0);
 		debug(0, "[INFO] %i Pid %i returned !\n", i, this->dashboard.processes[i]);
@@ -63,7 +67,9 @@ extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 	philosopher->sim_abort.reaction = &philo_silence;
 	philosopher->sim_abort.reaction_arg = philosopher;
 	hermreceiver_start(&philosopher->sim_abort);
+	minithanatos_start(philosopher);
 	status = philoproc_main(philosopher);
+	minithanatos_stop(philosopher);
 	hermreceiver_stop(&philosopher->sim_abort);
 	logos_deinit();
 	sim_destroy(this);
