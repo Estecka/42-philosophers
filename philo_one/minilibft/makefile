@@ -5,6 +5,7 @@ SRCS = \
 	minilibft.c \
 	math.c \
 	stringgen.c \
+	throw.c \
 
 OBJS = ${SRCS:.c=.o}
 

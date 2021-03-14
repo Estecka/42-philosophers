@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 18:09:27 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 15:22:52 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ extern int		main(int argc, char **argv)
 {
 	int	status;
 
-	dprintf(STDERR_FILENO, "%s\n", g_philo_variant);
+	debug(0, "%s\n", g_philo_variant);
 	if (!parseargs(argc, argv))
 		return (EXIT_FAILURE);
-	printf("philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
+	debug(0, "philo count: %i\nttdie: %i\ntteat: %i\nttsleep: %i\ngoal: %i\n",
 		g_philocount, g_ttdie, g_tteat, g_ttsleep, g_eatgoal);
 	if (g_eatgoal == 0)
 		return (EXIT_SUCCESS);

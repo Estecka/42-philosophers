@@ -6,14 +6,18 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:43:04 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/21 21:21:44 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 15:54:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher_ustensile.h"
 
 #include "main.h"
+#include "chronos.h"
 #include "sustenance_ustensile.h"
+#include "simulation.h"
+
+#include <stdio.h>
 
 #ifdef philo_one
 
@@ -31,6 +35,9 @@ extern void	philo_grab_ustensiles(t_philosopher *this)
 		if (target == g_philocount)
 			target = 0;
 		pthread_mutex_lock(&g_ustensiles[target]);
+		if (g_sim_status == sim_playing)
+			printf("%5li %i has grabbed a fork\n",
+				stopwatch_date() / MS2USEC, this->uid);
 		this->hands[i] = &g_ustensiles[target];
 	}
 }
@@ -50,8 +57,14 @@ extern void	philo_drop_ustensiles(t_philosopher *this)
 extern void	philo_grab_ustensiles(t_philosopher *this)
 {
 	sem_wait(g_ustensiles);
+	if (g_sim_status == sim_playing)
+		printf("%5li %i has grabbed one fork\n",
+			stopwatch_date() / MS2USEC, this->uid);
 	this->hands++;
 	sem_wait(g_ustensiles);
+	if (g_sim_status == sim_playing)
+		printf("%5li %i has grabbed two fork\n",
+			stopwatch_date() / MS2USEC, this->uid);
 	this->hands++;
 }
 
