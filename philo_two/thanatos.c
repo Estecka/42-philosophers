@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 16:06:06 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 19:41:17 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 		&& !(philo->status == phi_eating && philo->ttaction <= philo->ttdie))
 	{
 		simulation_emergency_brakes();
-		printf("%5u %i died.\n", philo->ttdie / 1000, philo->uid);
+		printf("%5i %i died.\n", (int)philo->ttdie / 1000, philo->uid);
 		dst->isdead = TRUE;
 		dst->next_check = current_date;
 		omnilock_unlock(&philo->self);
@@ -69,7 +69,7 @@ extern useconds_t	watch_over_mortals(void)
 	{
 		simulation_emergency_brakes();
 		debug(0, "%5li All philosophers are fulfilled.\n",
-			stopwatch_date() / MS2USEC);
+			(long)stopwatch_date() / MS2USEC);
 		return (0);
 	}
 	return (next_check);

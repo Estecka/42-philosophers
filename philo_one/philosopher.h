@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:41:48 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 19:40:15 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ struct	s_philosopher
 	pthread_t		thread;
 	t_phistatus		status;
 	unsigned int	meals;
-	useconds_t		ttaction;
-	useconds_t		ttdie;
+	suseconds_t		ttaction;
+	suseconds_t		ttdie;
 	t_omnilock		self;
 
 # ifdef philo_one

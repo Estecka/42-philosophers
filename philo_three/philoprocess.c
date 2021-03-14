@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 17:30:00 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 19:50:46 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	philoproc_eat(t_philoproc *this)
 	this->meals++;
 	if ((signed)this->meals == g_eatgoal)
 	{
-		debug(0, "%5lu %i is fulfilled\n", date / MS2USEC, this->uid);
+		debug(0, "%5u %i is fulfilled\n", (int)date / MS2USEC, this->uid);
 		hermes_send(&this->isfulfilled, 1);
 	}
 	this->status = phi_sleeping;

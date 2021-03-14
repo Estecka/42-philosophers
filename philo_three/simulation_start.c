@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:25:45 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 19:58:00 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 21:11:00 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	philo_silence(t_hermreceiver *hermes, void *philo)
 	(void)hermes;
 	logos_silence();
 	debug(0, "%5li %i was Silenced\n",
-		stopwatch_date() / MS2USEC, ((t_philoproc*)philo)->uid);
+		(long)stopwatch_date() / MS2USEC, ((t_philoproc*)philo)->uid);
 	((t_philoproc*)philo)->status = phi_dead;
 	stopwatch_stop();
 }

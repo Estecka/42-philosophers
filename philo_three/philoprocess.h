@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 18:20:13 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 19:49:26 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ struct	s_philoproc
 {
 	unsigned int	uid;
 	t_phistatus		status;
-	useconds_t		ttaction;
-	useconds_t		ttdie;
+	suseconds_t		ttaction;
+	suseconds_t		ttdie;
 	unsigned int	meals;
 	unsigned int	hands;
 
