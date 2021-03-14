@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:43:04 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 17:32:12 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 18:54:29 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 extern void	philo_grab_ustensiles(t_philoproc *this)
 {
 	sem_wait(g_ustensiles);
-	philo_log(-1, stopwatch_date(), this->uid, "has taken one fork");
+	philo_log(-1, stopwatch_date(), this->uid, "has taken a fork");
 	this->hands++;
 	sem_wait(g_ustensiles);
-	philo_log(-1, stopwatch_date(), this->uid, "has taken two forks");
+	philo_log(-1, stopwatch_date(), this->uid, "has taken a forks");
 	this->hands++;
 }
 
