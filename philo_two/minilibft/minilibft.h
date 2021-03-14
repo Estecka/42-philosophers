@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:22:19 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:43:47 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/13 19:58:18 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #ifndef MINILIBFT_H
 # define MINILIBFT_H
 
+# include <errno.h>
+# include <stdnoreturn.h>
 # include <unistd.h>
 
 # define TRUE  1
@@ -31,5 +33,10 @@ useconds_t		greatest(useconds_t a, useconds_t b);
 float			min(float a, float b);
 float			max(float a, float b);
 float			clamp(float v, float min, float max);
+
+noreturn void			throw(int status, const char *format, ...
+) __attribute__((format(printf,2,3)));
+void			debug(int status, const char *format, ...
+) __attribute__((format(printf,2,3)));
 
 #endif

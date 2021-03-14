@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 14:09:41 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 17:14:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/12 18:09:21 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static struct timeval	g_origin;
 extern void				stopwatch_start(void)
 {
 	gettimeofday(&g_origin, NULL);
+	g_origin.tv_sec++;
 	g_stopwatch_running = TRUE;
 }
 
@@ -33,7 +34,7 @@ extern void				stopwatch_stop(void)
 	g_stopwatch_running = FALSE;
 }
 
-extern useconds_t		stopwatch_date(void)
+extern suseconds_t		stopwatch_date(void)
 {
 	struct timeval	current_time;
 
@@ -56,9 +57,9 @@ extern useconds_t		wait_until(useconds_t target_date)
 
 # elif defined MICROSLEEP
 
-extern useconds_t		wait_until(useconds_t target_date)
+extern suseconds_t		wait_until(useconds_t target_date)
 {
-	useconds_t	current_date;
+	suseconds_t	current_date;
 
 	while ((current_date = stopwatch_date()) < target_date
 		&& g_stopwatch_running)

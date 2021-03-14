@@ -6,13 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:50 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 17:12:37 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/12 18:09:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHRONOS_H
 # define CHRONOS_H
 
+# include <semaphore.h>
 # include <unistd.h>
 
 /*
@@ -47,7 +48,7 @@ void			stopwatch_stop(void);
 ** Gives the date in microseconds since the origin of times.
 */
 
-useconds_t		stopwatch_date(void);
+suseconds_t		stopwatch_date(void);
 
 /*
 ** Blocks the thread until the given date is reached.
@@ -55,6 +56,6 @@ useconds_t		stopwatch_date(void);
 ** @return useconds_t	The date when the function returned.
 */
 
-useconds_t		wait_until(useconds_t date);
+suseconds_t		wait_until(useconds_t date);
 
 #endif
