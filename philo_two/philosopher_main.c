@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 15:51:52 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ static void	philo_sleep(t_philosopher *this)
 	useconds_t	date;
 
 	date = wait_until(this->ttaction);
+	if (g_sim_status == sim_playing)
+		printf("%5i %i is thinking	(+%.3f)\n",
+			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
 	omnilock_lockup(&this->self);
 	if (g_sim_status == sim_playing)
 	{
-		printf("%5i %i is thinking	(+%.3f)\n",
-			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
 		this->ttaction = date + g_ttsleep;
 		this->status = phi_thinking;
 	}
@@ -45,11 +46,12 @@ static void	philo_think(t_philosopher *this)
 	useconds_t	date;
 
 	philo_grab_ustensiles(this);
-	omnilock_lockup(&this->self);
 	date = stopwatch_date();
 	if (g_sim_status == sim_playing)
-	{
 		printf("%5i %i is eating\n", date / 1000, this->uid);
+	omnilock_lockup(&this->self);
+	if (g_sim_status == sim_playing)
+	{
 		this->ttaction = date + g_tteat;
 		this->status = phi_eating;
 	}
@@ -63,14 +65,15 @@ static void	philo_eat(t_philosopher *this)
 	useconds_t	date;
 
 	date = wait_until(this->ttaction);
+	if (g_sim_status == sim_playing)
+		printf("%5i %i is sleeping	(+%.3f)\n",
+			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
 	philo_drop_ustensiles(this);
 	omnilock_lockup(&this->self);
 	this->ttdie = this->ttaction + g_ttdie;
 	this->meals++;
 	if (g_sim_status == sim_playing)
 	{
-		printf("%5i %i is sleeping	(+%.3f)\n",
-			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
 		this->ttaction = date + g_ttsleep;
 		this->status = phi_sleeping;
 	}

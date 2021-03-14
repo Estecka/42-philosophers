@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 15:26:27 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 15:36:50 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static short		philo_medcheck(t_philosopher *philo, t_philo_medcheck *dst)
 		&& !(philo->status == phi_eating && philo->ttaction <= philo->ttdie))
 	{
 		simulation_emergency_brakes();
-		printf("%5u %i has died.\n", philo->ttdie / 1000, philo->uid);
+		printf("%5u %i died.\n", philo->ttdie / 1000, philo->uid);
 		dst->isdead = TRUE;
 		dst->next_check = current_date;
 		omnilock_unlock(&philo->self);
