@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:40:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 15:36:50 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 16:06:06 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ extern useconds_t	watch_over_mortals(void)
 	if (allfulfilled)
 	{
 		simulation_emergency_brakes();
-		printf("%5li All philosophers are fulfilled.\n",
-			stopwatch_date() / 1000);
+		debug(0, "%5li All philosophers are fulfilled.\n",
+			stopwatch_date() / MS2USEC);
 		return (0);
 	}
 	return (next_check);

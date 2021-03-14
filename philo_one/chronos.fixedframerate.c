@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 14:24:47 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:40:20 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 16:03:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void				compute_perfs(void)
 	g_perfs = (float)(true_time - g_prev_perfcheck)
 		/ (g_date[g_i] - g_prev_perfcheck);
 	g_perfs = clamp(g_perfs, PERF_MIN, PERF_MAX);
-	dprintf(STDERR_FILENO, "%5u Performance: %f\n", true_time / 1000, g_perfs);
+	debug(0, "%5u Performance: %f\n", true_time / 1000, g_perfs);
 	g_prev_perfcheck = g_next_perfcheck;
 	g_next_perfcheck += 1000000;
 }

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:59:15 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 18:19:29 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 16:11:00 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	*minithanatos_main(t_philoproc *philo)
 {
 	suseconds_t	date;
 
-	debug(0, "   -- %i Death is inescapable\n", philo->uid);
 	wait_until(g_ttdie);
 	while (!philo->sim_abort.value && philo->status != phi_dead)
 	{
@@ -31,11 +30,8 @@ static void	*minithanatos_main(t_philoproc *philo)
 			philo->status = phi_dead;
 			break ;
 		}
-		debug(0, "%5lu %i survived, for now...	(%u)\n",
-			date / MS2USEC, philo->uid, philo->ttdie / MS2USEC);
 		wait_until(philo->ttdie);
 	}
-	debug(0, "   -- %i death is done.\n", philo->uid);
 	return (NULL);
 }
 

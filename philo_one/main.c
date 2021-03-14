@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 15:01:12 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 15:22:52 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 16:05:02 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ extern int		main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	if (!ustensile_init(g_philocount))
 	{
-		dprintf(STDERR_FILENO, "Ustensiles init error: %s\n", strerror(errno));
+		throw(errno, "Ustensiles init error.\n");
 		return (EXIT_FAILURE);
 	}
 	if (!philo_init(g_philocount))
 	{
-		write(STDERR_FILENO, "Philo init error.\n", 19);
+		throw(errno, "Philo init error.\n");
 		ustensile_deinit();
 		return (EXIT_FAILURE);
 	}
