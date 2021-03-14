@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:33:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/13 18:17:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 17:22:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ extern int	demeter_main(t_simdash *this)
 			if (this->deathes[i].value)
 			{
 				hermes_send(&this->sim_abort, g_philocount);
-				philo_log(-1, stopwatch_date(), i, "is dead");
+				philo_log(-1, stopwatch_date(), i, "died");
 				break ;
 			}
 		if (i < g_philocount)

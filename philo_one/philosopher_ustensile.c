@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:43:04 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 15:54:47 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/14 17:31:49 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ extern void	philo_grab_ustensiles(t_philosopher *this)
 			target = 0;
 		pthread_mutex_lock(&g_ustensiles[target]);
 		if (g_sim_status == sim_playing)
-			printf("%5li %i has grabbed a fork\n",
+			printf("%5li %i has taken a fork\n",
 				stopwatch_date() / MS2USEC, this->uid);
 		this->hands[i] = &g_ustensiles[target];
 	}
@@ -58,12 +58,12 @@ extern void	philo_grab_ustensiles(t_philosopher *this)
 {
 	sem_wait(g_ustensiles);
 	if (g_sim_status == sim_playing)
-		printf("%5li %i has grabbed one fork\n",
+		printf("%5li %i has taken a fork\n",
 			stopwatch_date() / MS2USEC, this->uid);
 	this->hands++;
 	sem_wait(g_ustensiles);
 	if (g_sim_status == sim_playing)
-		printf("%5li %i has grabbed two fork\n",
+		printf("%5li %i has taken a fork\n",
 			stopwatch_date() / MS2USEC, this->uid);
 	this->hands++;
 }
