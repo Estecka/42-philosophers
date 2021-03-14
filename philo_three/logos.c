@@ -43,16 +43,12 @@ extern void	logos_silence(void)
 extern void	philo_log(suseconds_t ttaction, useconds_t wakedate,
 unsigned int philo_uid, const char *message)
 {
+	(void)ttaction;
 	omnilock_lockup(&g_lock);
 	if (!g_issilenced)
 	{
-		if (ttaction < 0)
-			printf("%5u %i	%s\n",
-				wakedate / MS2USEC, philo_uid, message);
-		else
-			printf("%5u %i %s	(%+.3fms)\n",
-				wakedate / MS2USEC, philo_uid, message,
-				(wakedate - ttaction) * USEC2MS);
+		printf("%5u %i	%s\n",
+			wakedate / MS2USEC, philo_uid, message);
 	}
 	omnilock_unlock(&g_lock);
 }

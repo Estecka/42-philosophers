@@ -28,8 +28,8 @@ static void	philo_sleep(t_philosopher *this)
 
 	date = wait_until(this->ttaction);
 	if (g_sim_status == sim_playing)
-		printf("%5i %i is thinking	(+%.3f)\n",
-			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
+		printf("%5i %i is thinking\n",
+			date / 1000, this->uid);
 	omnilock_lockup(&this->self);
 	if (g_sim_status == sim_playing)
 		this->status = phi_thinking;
@@ -71,8 +71,8 @@ static void	philo_eat(t_philosopher *this)
 
 	date = wait_until(this->ttaction);
 	if (g_sim_status == sim_playing)
-		printf("%5i %i is sleeping	(+%.3f)\n",
-			date / 1000, this->uid, (date - this->ttaction) / (float)1000);
+		printf("%5i %i is sleeping\n",
+			date / 1000, this->uid);
 	philo_drop_ustensiles(this);
 	omnilock_lockup(&this->self);
 	this->ttdie = this->ttaction + g_ttdie;

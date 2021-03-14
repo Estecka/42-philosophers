@@ -26,7 +26,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-extern noreturn void	mutate_demeter(t_simbuilder *this)
+extern void	mutate_demeter(t_simbuilder *this)
 {
 	int				status;
 	unsigned int	i;
@@ -65,7 +65,7 @@ static void	philo_silence(t_hermreceiver *hermes, void *philo)
 	stopwatch_stop();
 }
 
-extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
+extern void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 {
 	int	status;
 
@@ -82,7 +82,7 @@ extern noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher)
 	exit(status);
 }
 
-extern noreturn void	sim_start(t_simbuilder *this)
+extern void	sim_start(t_simbuilder *this)
 {
 	pid_t			pid;
 	unsigned int	i;

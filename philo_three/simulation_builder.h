@@ -37,9 +37,9 @@ struct	s_simbuilder
 
 short	sim_init(t_simbuilder *this);
 void	sim_destroy(t_simbuilder *this);
-noreturn void	sim_start(t_simbuilder *this);
+void	sim_start(t_simbuilder *this);
 
-noreturn void	mutate_demeter(t_simbuilder *this);
-noreturn void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher);
+void	mutate_demeter(t_simbuilder *this);
+void	mutate_philo(t_simbuilder *this, t_philoproc *philosopher);
 
 #endif
