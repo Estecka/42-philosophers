@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 15:05:26 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/17 21:10:27 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 22:08:20 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	philo_think(t_philosopher *this)
 		debug(0, "%5i %i is fasting\n", 
 			(int)stopwatch_date() / MS2USEC, this->uid);
 		this->nextfast += g_philocount / 2;
-		date = wait_until(this->ttaction + g_tteat);
+		date = wait_until(this->ttaction + (30 * MS2USEC));
 		debug(0, "%5i %i is thinking again\n", (int)date / MS2USEC, this->uid);
 	}
 	philo_grab_ustensiles(this);

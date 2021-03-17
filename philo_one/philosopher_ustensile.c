@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 14:43:04 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 19:35:11 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 21:51:08 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,20 @@
 
 extern void	philo_grab_ustensiles(t_philosopher *this)
 {
-	int				i;
-	unsigned short	odd;
-	unsigned int	target;
+	int	target;
 
-	odd = this->uid & 1;
-	i = -1;
-	while (++i < 2)
-	{
-		target = (odd != i) + this->uid;
-		if (target == g_philocount)
-			target = 0;
-		pthread_mutex_lock(&g_ustensiles[target]);
-		if (g_sim_status == sim_playing)
-			printf("%5li %i has taken a fork\n",
-				(long)stopwatch_date() / MS2USEC, this->uid);
-		this->hands[i] = &g_ustensiles[target];
-	}
+	target = (this->uid + 1) % g_philocount;
+	pthread_mutex_lock(&g_ustensiles[target]);
+	if (g_sim_status == sim_playing)
+		printf("%5li %i has taken a fork\n",
+			(long)stopwatch_date() / MS2USEC, this->uid);
+	this->hands[1] = &g_ustensiles[target];
+	target = this->uid;
+	pthread_mutex_lock(&g_ustensiles[target]);
+	if (g_sim_status == sim_playing)
+		printf("%5li %i has taken a fork\n",
+			(long)stopwatch_date() / MS2USEC, this->uid);
+	this->hands[0] = &g_ustensiles[target];
 }
 
 extern void	philo_drop_ustensiles(t_philosopher *this)

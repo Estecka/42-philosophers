@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 14:57:37 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 19:33:43 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 21:51:36 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,7 @@ static short	simulation_init(void)
 
 	g_sim_status = sim_playing;
 	i = -1;
-	while ((i += 2) < g_philocount)
-		if (!simulation_init_one(i))
-			return (FALSE);
-	i = -2;
-	while ((i += 2) < g_philocount)
+	while (++i < g_philocount)
 		if (!simulation_init_one(i))
 			return (FALSE);
 	return (TRUE);
