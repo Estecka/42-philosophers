@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:32:55 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 19:40:15 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 19:55:54 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ enum	e_phistatus
 ** @var int uid	The unique identifiant of the philosopher
 ** @var pthread_t	The thread the philosopher is running on.
 ** @var t_phistatus status	The current state of the philosopher
-** @var int meals	The amount of meals the little man has finished eating.
+** @var unsigned int meals	The amount of meals the little man has finished eati
+** ng.
+** @var unsigned int nextfast	The next meal after wich the philosopher should
+**  fast, in order to let other philosophers thrive.
 ** @var int ttaction	The date in microseconds when the philosopher will compl
 ** ete its ongoing action.
 ** @var int ttdie	The date in microseconds when the philosopher will starve.
@@ -47,6 +50,7 @@ struct	s_philosopher
 	pthread_t		thread;
 	t_phistatus		status;
 	unsigned int	meals;
+	unsigned int	nextfast;
 	suseconds_t		ttaction;
 	suseconds_t		ttdie;
 	t_omnilock		self;
