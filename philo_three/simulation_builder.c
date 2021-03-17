@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:27:40 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 18:30:19 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 22:50:54 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ static void		sim_init_philo(t_simbuilder *this, unsigned int i)
 	hermes_init(&this->deathes, 1);
 	this->philos[i].isdead = this->deathes.sender;
 	this->dashboard.deathes[i] = this->deathes.receivers;
+	if (g_philocount % 2)
+		this->philos[i].nextfast = (i + 1) / 2;
+	else
+		this->philos[i].nextfast = -1;
 }
 
 extern short	sim_init(t_simbuilder *this)

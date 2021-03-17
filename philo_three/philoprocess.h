@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 16:58:54 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 19:49:26 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 22:49:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ enum	e_phistatus
 ** @var useconds_t ttaction	The date when the philosopher will starve to death.
 ** @var unsigned int meals	The amount of times the philosopher has finished a m
 ** eal.
+** @var unsigned int nextfast	The meals after which the philosopher should fas
+** t, in order to let others thrive.
 ** @var unsigned int hands	The amount of eating ustensiles this philosopher has
 **  grabbed.
 **
@@ -55,6 +57,7 @@ struct	s_philoproc
 	suseconds_t		ttaction;
 	suseconds_t		ttdie;
 	unsigned int	meals;
+	unsigned int	nextfast;
 	unsigned int	hands;
 
 	pthread_t		minithan;

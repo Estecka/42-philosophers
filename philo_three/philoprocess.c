@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/14 19:50:46 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/17 22:53:33 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ static void	philoproc_think(t_philoproc *this)
 {
 	suseconds_t	date;
 
+	if (this->meals == this->nextfast)
+	{
+		debug(0, "%5i %i is fasting\n",
+			(int)stopwatch_date() / MS2USEC, this->uid);
+		this->nextfast += g_philocount / 2;
+		date = wait_until(this->ttaction + (30 * MS2USEC));
+		debug(0, "%5i %i is thinking again\n", (int)date / MS2USEC, this->uid);
+	}
 	philo_grab_ustensiles(this);
 	date = stopwatch_date();
 	philo_log(-1, date, this->uid, "is eating");
