@@ -6,13 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 19:52:06 by abaur             #+#    #+#             */
-/*   Updated: 2021/02/26 15:38:10 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/15 14:43:53 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chronos.h"
 #include "minilibft/minilibft.h"
 
+#include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -21,10 +22,10 @@ static useconds_t	g_sleeptime;
 
 static void	*thread_main(void *uid)
 {
-	__suseconds_t	target_date;
-	__suseconds_t	wake_date;
-	__suseconds_t	latency;
-	__suseconds_t	max_latency;
+	suseconds_t	target_date;
+	suseconds_t	wake_date;
+	suseconds_t	latency;
+	suseconds_t	max_latency;
 
 	max_latency = 0;
 	wait_until(1000000);
