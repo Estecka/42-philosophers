@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 19:18:14 by abaur             #+#    #+#             */
-/*   Updated: 2021/03/17 22:53:33 by abaur            ###   ########.fr       */
+/*   Updated: 2021/03/18 16:52:55 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ extern int	philoproc_main(t_philoproc *this)
 	}
 	debug(0, "   -- %i I no longer think, and therefore am no longer\n",
 		this->uid);
+	philo_drop_ustensiles(this);
 	return (EXIT_SUCCESS);
 }
